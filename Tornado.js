@@ -1,8 +1,5 @@
 function TEntidad () 
 {
-  	this.ojos = 2;
-    this.piernas = 4;
-
     this.beginDraw = function() {}
     this.endDraw = function() {}
 }
@@ -10,7 +7,7 @@ function TEntidad ()
 function TNodo (padre) {
 	
 	this.entidad = new TEntidad();
-	this.hijos   = new array();
+	this.hijos   = new Array();
 	this.padre   = padre;
 
 	this.addHijo    = function(TNodo nodo) {}
@@ -32,19 +29,19 @@ function TColor(){
 function TLuz () {
    this.intensidad = new TColor();
 
-	this.setIntensidad = function(TColor inten) {}
-	this.getIntensidad = function() {}
+	this.setIntensidad = function(inten) { this.intesidad = inten;}
+	this.getIntensidad = function() { return this.intensidad;}
 	this.beginDraw     = function() {}
 	this.endDraw       = function() {}
 }
 
-function TCamara () {
-	this.esPerspectiva;
+function TCamara (º) {
+	this.esPerspectiva = new Float32Array();
 	this.cercano = 0.0;
 	this.lejano  = 0.0;
 
-	this.setPerspectiva = function(float x, float y, float z) {}
-	this.setParalela    = function(float x, float y, float z) {}
+	this.setPerspectiva = function(x, y, z) {esPerspectiva.push([x,y,z]);}
+	this.setParalela    = function(x, y, z) {}
 	this.beginDraw      = function() {}
 	this.endDraw        = function() {}
    
@@ -62,7 +59,6 @@ function TRecursoMalla () {
 
 function TMalla () {
  	this.malla = new TRecursoMalla();
-
 }
 
 function TTransf () {
