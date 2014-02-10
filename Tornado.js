@@ -55,15 +55,13 @@ TORNADO.Node.prototype = {
 
 function TEntidad () 
 {
-  	this.ojos = 2;
-    this.piernas = 4;
-
     this.beginDraw = function() {}
     this.endDraw = function() {}
 }
 /*
 function TNodo () {
 	
+<<<<<<< HEAD
 	this.entidad = null;
 	this.hijos   = new array();
 	this.padre   = null;
@@ -77,6 +75,19 @@ function TNodo () {
 	this.remHijoByNode    = function(node) {this.entidad = ent}
 
 	this.setEntidad = function(enti) {this.entidad = ent}
+=======
+	this.entidad = new TEntidad();
+	this.hijos   = new Array();
+	this.padre   = padre;
+
+	this.addHijo    = function(TNodo nodo) {}
+	this.remHijo    = function(TNodo nodo) {}
+<<<<<<< HEAD
+	this.setEntidad = function(TEntidad ent) {this.entidad = ent}
+=======
+	this.setEntidad = function(TEntidad ent) {this.entidad = ent;}
+>>>>>>> be8ea2413f39af6b7c81c32e9c918c5ec1163476
+>>>>>>> 4eb59acac1d42806412bed59c672f8ce9bdfa0f6
 	this.getEntidad = function() {return this.entidad}
 	this.setPadre   = function(pad) {this.padre = pad}
 	this.getPadre   = function() {return this.padre}
@@ -91,19 +102,19 @@ function TColor(){
 function TLuz () {
    this.intensidad = new TColor();
 
-	this.setIntensidad = function(TColor inten) {}
-	this.getIntensidad = function() {}
+	this.setIntensidad = function(inten) { this.intesidad = inten;}
+	this.getIntensidad = function() { return this.intensidad;}
 	this.beginDraw     = function() {}
 	this.endDraw       = function() {}
 }
 
-function TCamara () {
-	this.esPerspectiva;
+function TCamara (º) {
+	this.esPerspectiva = new Float32Array();
 	this.cercano = 0.0;
 	this.lejano  = 0.0;
 
-	this.setPerspectiva = function(float x, float y, float z) {}
-	this.setParalela    = function(float x, float y, float z) {}
+	this.setPerspectiva = function(x, y, z) {esPerspectiva.push([x,y,z]);}
+	this.setParalela    = function(x, y, z) {}
 	this.beginDraw      = function() {}
 	this.endDraw        = function() {}
    
@@ -119,7 +130,11 @@ function TRecursoMalla () {
 }
 
 function TMalla () {
+<<<<<<< HEAD
 	this.malla = new TRecursoMalla();
+=======
+ 	this.malla = new TRecursoMalla();
+>>>>>>> 4eb59acac1d42806412bed59c672f8ce9bdfa0f6
 }
 
 function TTransf () {
