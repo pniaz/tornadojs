@@ -15,7 +15,11 @@ function TNodo (padre) {
 
 	this.addHijo    = function(TNodo nodo) {}
 	this.remHijo    = function(TNodo nodo) {}
+<<<<<<< HEAD
+	this.setEntidad = function(TEntidad ent) {this.entidad = ent}
+=======
 	this.setEntidad = function(TEntidad ent) {this.entidad = ent;}
+>>>>>>> be8ea2413f39af6b7c81c32e9c918c5ec1163476
 	this.getEntidad = function() {return this.entidad}
 	this.getPadre   = function() {return this.}
 	this.draw       = function() {}
