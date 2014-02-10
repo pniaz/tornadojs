@@ -72,4 +72,13 @@ function TTransf () {
 	this.endDraw   = function() {}
 }
 
+//Herencia
+TLuz.prototype = new TEntidad();
+TCamara.prototype = new TEntidad();
+TMalla.prototype = new TEntidad();
+TTransf.prototype = new TEntidad();
+
+
+
+
 
