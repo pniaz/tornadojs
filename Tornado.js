@@ -7,16 +7,17 @@ function TEntidad ()
     this.endDraw = function() {}
 }
 
-function TNodo () {
+function TNodo (padre) {
 	
 	this.entidad = new TEntidad();
 	this.hijos   = new array();
+	this.padre   = padre;
 
 	this.addHijo    = function(TNodo nodo) {}
 	this.remHijo    = function(TNodo nodo) {}
-	this.setEntidad = function(TEntidad ent) {}
+	this.setEntidad = function(TEntidad ent) {this.entidad = ent;}
 	this.getEntidad = function() {return this.entidad}
-	this.getPadre   = function() {}
+	this.getPadre   = function() {return this.}
 	this.draw       = function() {}
 }
 
