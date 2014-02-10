@@ -7,16 +7,21 @@ function TEntidad ()
     this.endDraw = function() {}
 }
 
-function TNodo () {
+function TNodo (padre) {
 	
 	this.entidad = new TEntidad();
 	this.hijos   = new array();
+	this.padre   = padre;
 
 	this.addHijo    = function(TNodo nodo) {}
 	this.remHijo    = function(TNodo nodo) {}
+<<<<<<< HEAD
 	this.setEntidad = function(TEntidad ent) {this.entidad = ent}
+=======
+	this.setEntidad = function(TEntidad ent) {this.entidad = ent;}
+>>>>>>> be8ea2413f39af6b7c81c32e9c918c5ec1163476
 	this.getEntidad = function() {return this.entidad}
-	this.getPadre   = function() {}
+	this.getPadre   = function() {return this.}
 	this.draw       = function() {}
 }
 
@@ -70,5 +75,14 @@ function TTransf () {
 	this.beginDraw = function() {}
 	this.endDraw   = function() {}
 }
+
+//Herencia
+TLuz.prototype = new TEntidad();
+TCamara.prototype = new TEntidad();
+TMalla.prototype = new TEntidad();
+TTransf.prototype = new TEntidad();
+
+
+
 
 
