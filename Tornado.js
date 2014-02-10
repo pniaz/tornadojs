@@ -14,7 +14,7 @@ function TNodo () {
 
 	this.addHijo    = function(TNodo nodo) {}
 	this.remHijo    = function(TNodo nodo) {}
-	this.setEntidad = function(TEntidad ent) {}
+	this.setEntidad = function(TEntidad ent) {this.entidad = ent}
 	this.getEntidad = function() {return this.entidad}
 	this.getPadre   = function() {}
 	this.draw       = function() {}
