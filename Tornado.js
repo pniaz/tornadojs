@@ -13,11 +13,11 @@ function TNodo (padre) {
 	this.hijos   = new array();
 	this.padre   = padre;
 
-	this.addHijo    = function(TNodo nodo) {}
-	this.remHijo    = function(TNodo nodo) {}
-	this.setEntidad = function(TEntidad ent) {this.entidad = ent;}
+	this.addHijo    = function(nodo) {this.hijos.push(nodo);}
+	this.remHijo    = function(index) {this.entidad = ent}
+	this.setEntidad = function(enti) {this.entidad = ent}
 	this.getEntidad = function() {return this.entidad}
-	this.getPadre   = function() {return this.}
+	this.getPadre   = function() {return this.padre}
 	this.draw       = function() {}
 }
 
