@@ -7,17 +7,25 @@ function TEntidad ()
     this.endDraw = function() {}
 }
 
-function TNodo (padre) {
+function TNodo () {
 	
-	this.entidad = new TEntidad();
+	this.entidad = null;
 	this.hijos   = new array();
-	this.padre   = padre;
+	this.padre   = null;
 
-	this.addHijo    = function(nodo) {this.hijos.push(nodo);}
-	this.remHijo    = function(index) {this.entidad = ent}
+	this.addHijo    = function(nodo) {
+		return this.hijos.push(nodo);
+	}
+	this.remHijoByIndex    = function(index) {
+		this.hijos.splice(index,1);
+	}
+	this.remHijoByNode    = function(node) {this.entidad = ent}
+
 	this.setEntidad = function(enti) {this.entidad = ent}
 	this.getEntidad = function() {return this.entidad}
+	this.setPadre   = function(pad) {this.padre = pad}
 	this.getPadre   = function() {return this.padre}
+
 	this.draw       = function() {}
 }
 
@@ -47,7 +55,6 @@ function TCamara () {
 }
 
 function TFichero () {
-
 }
 
 function TRecursoMalla () {
@@ -57,8 +64,7 @@ function TRecursoMalla () {
 }
 
 function TMalla () {
- 	this.malla = new TRecursoMalla();
-
+	this.malla = new TRecursoMalla();
 }
 
 function TTransf () {
