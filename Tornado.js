@@ -1,11 +1,80 @@
+/**
+ * @author Álvaro Yuste / http://yuste.info/
+ * @author Javier Sánchez Riquelme / http://javiersr.com
+ * @author Pablo Niñoles Aznar / http://insiria.com/imagine
+ */
+
+var TORNADO = { REVISION: '1' };
+
+TORNADO.Node = function ( value ) {
+
+	return this;
+
+};
+/*
+	this.entidad = null;
+	this.hijos   = new array();
+	this.padre   = null;
+
+	this.addHijo    = function(nodo) {
+		return this.hijos.push(nodo);
+	}
+	this.remHijoByIndex    = function(index) {
+		this.hijos.splice(index,1);
+	}
+	this.remHijoByNode    = function(node) {this.entidad = ent}
+
+	this.setEntidad = function(enti) {this.entidad = ent}
+	this.getEntidad = function() {return this.entidad}
+	this.setPadre   = function(pad) {this.padre = pad}
+	this.getPadre   = function() {return this.padre}
+
+	this.draw       = function() {}
+*/
+TORNADO.Node.prototype = {
+
+	constructor: TORNADO.Node,
+
+	entity: null, 
+	dad: null,
+	children: new array(), 
+
+	setEntity: function ( value ) {
+		if ( value instanceof TORNADO.Entity ) {
+			this.entity = value;
+		}
+		return true;
+	},
+	addChild: function ( node ) {
+		if ( node instanceof THREE.Node ) {
+			return this.hijos.push(nodo);
+		}
+		return -1;
+	},
+};
+
 function TEntidad () 
 {
     this.beginDraw = function() {}
     this.endDraw = function() {}
 }
 
-function TNodo (padre) {
-	
+function TNodo () {
+
+	this.entidad = null;
+	this.hijos   = new array();
+	this.padre   = null;
+
+	this.addHijo    = function(nodo) {
+		return this.hijos.push(nodo);
+	}
+	this.remHijoByIndex    = function(index) {
+		this.hijos.splice(index,1);
+	}
+	this.remHijoByNode    = function(node) {this.entidad = ent}
+
+	this.setEntidad = function(enti) {this.entidad = ent}
+
 	this.entidad = new TEntidad();
 	this.hijos   = new Array();
 	this.padre   = padre;
@@ -62,7 +131,6 @@ function TCamara () {
 }
 
 function TFichero () {
-
 }
 
 function TRecursoMalla () {
@@ -72,7 +140,7 @@ function TRecursoMalla () {
 }
 
 function TMalla () {
- 	this.malla = new TRecursoMalla();
+	this.malla = new TRecursoMalla();
 }
 
 function TTransf () {
