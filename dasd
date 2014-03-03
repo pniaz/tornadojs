@@ -1,0 +1,171 @@
+[33mcommit 762185c621d867dba960b26540772caa912504fa[m
+Author: Javier Sanchez <javiershoz@gmail.com>
+Date:   Wed Feb 26 15:48:47 2014 +0100
+
+    Tree format and code changed; added K3D.js and glMatrix
+
+[33mcommit f788fca325ecc1e315b4359ae52ade0d9ae93146[m
+Merge: b3ef096 fe38ec7
+Author: Javier Sanchez <javiershoz@gmail.com>
+Date:   Sun Feb 23 21:25:50 2014 +0100
+
+    Merge branch 'master' of https://github.com/pniaz/tornadojs
+    
+    Conflicts:
+    	Tornado.js
+    
+    Completed a bit more the tree classes structure
+
+[33mcommit b3ef0963983f89a42f9dd5097e6279cffa2ca217[m
+Author: Javier Sanchez <javiershoz@gmail.com>
+Date:   Sun Feb 23 20:58:28 2014 +0100
+
+    Completada un poco más la estructura de clases.
+
+[33mcommit fe38ec7a064bfadb2f662c6eb3dde1542f1af073[m
+Merge: 64a7d5d 4eb59ac
+Author: ALVARO YUSTE TORREGROSA <ayt1@clL14-7>
+Date:   Mon Feb 10 17:01:23 2014 +0100
+
+    hola Merge branch 'master' of https://github.com/pniaz/tornadojs
+    
+    Conflicts:
+    	Tornado.js
+
+[33mcommit 64a7d5d7e21e8fe955f46e5931c394a0b64406cd[m
+Merge: b22494d d4bc79e
+Author: ALVARO YUSTE TORREGROSA <ayt1@clL14-7>
+Date:   Mon Feb 10 17:00:22 2014 +0100
+
+    Merge branch 'master' of https://github.com/pniaz/tornadojs
+    
+    Conflicts:
+    	Tornado.js
+
+[33mcommit 4eb59acac1d42806412bed59c672f8ce9bdfa0f6[m
+Merge: 418e104 d4bc79e
+Author: Javier Sanchez <javiershoz@gmail.com>
+Date:   Mon Feb 10 16:50:00 2014 +0100
+
+    Merge branch 'master' of https://github.com/pniaz/tornadojs
+
+[33mcommit 418e104a61bfb023ce284af0207aecac65de4795[m
+Author: Javier Sanchez <javiershoz@gmail.com>
+Date:   Mon Feb 10 16:48:29 2014 +0100
+
+    Luz y Camara
+
+[33mcommit b22494db1fa3471a54cd59022c53a182931f809f[m
+Author: ALVARO YUSTE TORREGROSA <ayt1@clL14-7>
+Date:   Mon Feb 10 16:26:43 2014 +0100
+
+    prueba4
+
+[33mcommit d4bc79e51c99a6a1a9b3ded1be1cafa1c72dbf69[m
+Merge: 3e76d53 a70e822
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Mon Feb 10 16:25:08 2014 +0100
+
+    Merge branches 'master' and 'master' of https://github.com/pniaz/tornadojs
+
+[33mcommit 3e76d539a0a155b24ee2284506e945ef96011b1b[m
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Mon Feb 10 16:24:55 2014 +0100
+
+    added lib three js
+
+[33mcommit a70e822638c97d0cb5f10c192ca335ae38d9b47e[m
+Merge: 87aebb6 be8ea24
+Author: Javier Sanchez <javiershoz@gmail.com>
+Date:   Mon Feb 10 16:06:21 2014 +0100
+
+    Merge branch 'master' of https://github.com/pniaz/tornadojs
+    
+    Conflicts:
+    	Tornado.js
+
+[33mcommit 61721481067cf6de587fdb9491e2b6e1323962c0[m
+Merge: 60f62ee be8ea24
+Author: ALVARO YUSTE TORREGROSA <ayt1@clL14-7>
+Date:   Mon Feb 10 16:04:27 2014 +0100
+
+    Merge branch 'master' of https://github.com/pniaz/tornadojs
+
+[33mcommit 60f62eeefb6fdcc7e0edc90bd458bb3d50989d23[m
+Author: ALVARO YUSTE TORREGROSA <ayt1@clL14-7>
+Date:   Mon Feb 10 16:04:08 2014 +0100
+
+    prueba3
+
+[33mcommit be8ea2413f39af6b7c81c32e9c918c5ec1163476[m
+Merge: 97b0f84 3a4ef76
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Mon Feb 10 16:02:55 2014 +0100
+
+    Merge branch 'master' of https://github.com/pniaz/tornadojs
+
+[33mcommit 97b0f8484a186b0d547539d5e6bed399f4e83f2e[m
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Mon Feb 10 16:02:48 2014 +0100
+
+    prueba
+
+[33mcommit 87aebb64a9ca125a7a7b526e5f602370f95250d6[m
+Author: Javier Sanchez <javiershoz@gmail.com>
+Date:   Mon Feb 10 16:02:37 2014 +0100
+
+    Prueba xavi
+
+[33mcommit 3a4ef76c5d9605790610959a451d584190f6a697[m
+Author: ALVARO YUSTE TORREGROSA <ayt1@clL14-7>
+Date:   Mon Feb 10 15:59:19 2014 +0100
+
+    prueba2
+
+[33mcommit e88493081b8a5be1c72146ad1d5e20a6b6ce011c[m
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Mon Feb 10 15:56:44 2014 +0100
+
+    added herencia
+
+[33mcommit 9d2dc1e35a3ba5bc90e9043837fc09d64f19d473[m
+Author: ALVARO YUSTE TORREGROSA <ayt1@clL14-7>
+Date:   Mon Feb 10 15:49:13 2014 +0100
+
+    hola
+
+[33mcommit cdfc953cf07c5d40c529db2faa9dd511a347d053[m
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Sat Feb 8 22:39:45 2014 +0100
+
+    Tornado.js added
+
+[33mcommit 67108991a8db4ac9f69e689dd270ab612e25aedc[m
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Wed Feb 5 18:40:17 2014 +0100
+
+    added index
+
+[33mcommit 521cd4c54f0446dd58c9ea83a10f7687fc0df33d[m
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Wed Feb 5 14:43:19 2014 +0100
+
+    new herencia
+
+[33mcommit 9a390ef17d9963c81cc088e39fe886b61f8a22b1[m
+Author: Pablo Niñoles Aznar <pnabty@gmail.com>
+Date:   Wed Feb 5 01:31:48 2014 +0100
+
+    herencia in javascript example
+
+[33mcommit 0b48b7fd1cad4d6ced9a6243b9c03cc3f6043c59[m
+Author: pniaz <pnabty@gmail.com>
+Date:   Tue Feb 4 17:41:12 2014 +0100
+
+    Update README.md
+
+[33mcommit 8873d11b9c671384a0a6925eabf14eaaa26c4112[m
+Author: pniaz <pnabty@gmail.com>
+Date:   Tue Feb 4 08:37:14 2014 -0800
+
+    Initial commit
