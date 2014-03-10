@@ -59,10 +59,9 @@ function TEntidad ()
     this.beginDraw = function() {}
     this.endDraw = function() {}
 }
-/*
+
 function TNodo () {
-	
-<<<<<<< HEAD
+
 	this.entidad = null;
 	this.hijos   = new array();
 	this.padre   = null;
@@ -76,40 +75,51 @@ function TNodo () {
 	this.remHijoByNode    = function(node) {this.entidad = ent}
 
 	this.setEntidad = function(enti) {this.entidad = ent}
-=======
+
 	this.entidad = new TEntidad();
 	this.hijos   = new Array();
 	this.padre   = padre;
 
-	this.addHijo    = function(TNodo nodo) {}
-	this.remHijo    = function(TNodo nodo) {}
-<<<<<<< HEAD
-	this.setEntidad = function(TEntidad ent) {this.entidad = ent}
-=======
-	this.setEntidad = function(TEntidad ent) {this.entidad = ent;}
->>>>>>> be8ea2413f39af6b7c81c32e9c918c5ec1163476
->>>>>>> 4eb59acac1d42806412bed59c672f8ce9bdfa0f6
+	this.addHijo    = function(nodo) {}
+	this.remHijo    = function(nodo) {}
+	this.setEntidad = function(ent) {this.entidad = ent;}
+	this.setPadre = function(ent) {this.padre = padre;}
 	this.getEntidad = function() {return this.entidad}
-	this.setPadre   = function(pad) {this.padre = pad}
 	this.getPadre   = function() {return this.padre}
-
-	this.draw       = function() {}
+	this.draw       = function() {
+		this.getEntidad().beginDraw();
+		this.getEntidad().endDraw();
+	}
 }
-*/
+
 function TColor(){
 
+	this.specular;
+	this.ambient;
+	this.diffuse;
+
+	this.setSpecular = function(spec) { this.specular = spec; }
+    this.setAmbient =  function(amb)  { this.ambient  = amb;  }
+    this.setDiffuse =  function(dif)  { this.diffuse  = dif;  }
+    this.getSpecular = function() { return this.specular; }
+    this.getAmbient =  function()  { return this.ambient; }
+    this.getDiffuse =  function()  { return this.diffuse; }
+
 }
 
-function TLuz () {
-   this.intensidad = new TColor();
+function TLuz (type) {
 
+    this.color = new TColor();
+    this.type = type;
 	this.setIntensidad = function(inten) { this.intesidad = inten;}
 	this.getIntensidad = function() { return this.intensidad;}
 	this.beginDraw     = function() {}
 	this.endDraw       = function() {}
+
 }
 
-function TCamara (º) {
+function TCamara () {
+	
 	this.esPerspectiva = new Float32Array();
 	this.cercano = 0.0;
 	this.lejano  = 0.0;
@@ -125,26 +135,23 @@ function TFichero () {
 }
 
 function TRecursoMalla () {
-   	this.cargarMalla    = function(TFichero fich) {}
+   	this.cargarMalla    = function(fich) {}
 	this.beginDraw      = function() {}
 	this.endDraw        = function() {}
 }
 
 function TMalla () {
-<<<<<<< HEAD
 	this.malla = new TRecursoMalla();
-=======
- 	this.malla = new TRecursoMalla();
->>>>>>> 4eb59acac1d42806412bed59c672f8ce9bdfa0f6
 }
 
 function TTransf () {
 
-	this.identidad = function() {}
-	this.cargar    = function() {}
-	this.trasponer = function() {}
-	this.trasladar = function(float x, float y, float z) {}
-	this.rotar     = function(float x, float y, float z) {}
+	this.identity = function() {}
+	this.load    = function() {}
+	this.transpose = function() {}
+	this.traslate = function(x, y, z) {}
+	this.rotate     = function(x, y, z) {}
+	this.scale = function(x, y, z)
 	this.beginDraw = function() {}
 	this.endDraw   = function() {}
 }
