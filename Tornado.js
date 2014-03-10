@@ -11,6 +11,7 @@ TORNADO.Node = function ( value ) {
 	return this;
 
 };
+
 /*
 	this.entidad = null;
 	this.hijos   = new array();
