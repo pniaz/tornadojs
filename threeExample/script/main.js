@@ -2,16 +2,14 @@ var WIDTH = window.innerWidth; // Ancho de pantalla
 var HEIGHT = window.innerHeight; // Alto de pantalla
   
 // Lienzo u objeto encargado del renderizado
-var lienzo = new THREE.WebGLRenderer();
+var canvas = document.getElementById("main");
+var lienzo = new THREE.WebGLRenderer({ canvas: canvas });
   
 // Establecemos las dimensiones del lienzo
 lienzo.setSize(
 	WIDTH,
 	HEIGHT
 );
-  
-// Añadimos el lienzo a la página
-document.body.appendChild(lienzo.domElement);
 
 // Creamos la escena
 var escena = new THREE.Scene;
