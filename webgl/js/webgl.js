@@ -13,11 +13,11 @@ function initGL(canvas) {
 	} catch(e) {
 	}
 	if (!gl) {
-	  alert("Could not initialise WebGL, sorry :-( ");
+	  alert("WebGL no está soportado en este sistema.");
 	}
 }
-function webGLStart() {
-    var canvas = document.getElementById("main");
+function webGLStart(canvas) {
+    var canvas = document.getElementById(canvas);
     initGL(canvas);
     initShaders();
     initBuffers();
