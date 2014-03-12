@@ -130,30 +130,16 @@ function setMatrixUniforms() {
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
     gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
 }
+//////////////////////////////////////////////////////////////////////
+
 
 console.log("Creo obj loader");
 
 var objLoader = new OBJLoader();
-loadOBJ();
 
-function loadOBJ() {
-	    var url = "./cubo.obj";
-	    objLoader.load(url, render);
-}
-	
-function localOBJ(ruta) {
-	    objLoader.local(ruta, render);
-}
+objLoader.load("./cubo.obj");
 
-function render(obj) {
-		var instance = obj;
 
-		var numTriangles = instance.decode();
-
-		console.log('Numero de triangulos del cubo');
-		console.log(numTriangles);
-		//update();
-}
 
 
 

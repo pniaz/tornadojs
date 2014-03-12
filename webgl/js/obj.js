@@ -28,32 +28,32 @@ OBJ.prototype.parseLine = function(i) {
   switch(type){
     case "v":
       var v = [	parseFloat(list[1]),
-		parseFloat(list[2]),
-		parseFloat(list[3])];
+		  parseFloat(list[2]),
+		  parseFloat(list[3])];
       if(list.length==5)
-	v.push(parseFloat(list[4]));
+        v.push(parseFloat(list[4]));
       this.listVertex.push(v);
     break;
     
     case "vt":
       var vt = [parseFloat(list[1]),
-		parseFloat(list[2]),
-		parseFloat(list[3])];
+  		parseFloat(list[2]),
+  		parseFloat(list[3])];
       this.list_vt.push(vt);
     break;
     
     case "vn":
       var vn = [parseFloat(list[1]),
-		parseFloat(list[2]),
-		parseFloat(list[3])];
-    this.list_vn.push(vn);
+  		parseFloat(list[2]),
+  		parseFloat(list[3])];
+      this.list_vn.push(vn);
     break;
   
     case "vp":
       var vp = [parseFloat(list[1]),
-		parseFloat(list[2])];
+		  parseFloat(list[2])];
       if(list.length==4)
-	v.push(parseFloat(list[3]));
+      v.push(parseFloat(list[3]));
       this.list_vp.push(vp);
     break;
     
