@@ -5,11 +5,12 @@ var squareVertexPositionBuffer;
 var gl;
 var shaderProgram;
 
-function initGL(canvas) {
+function initGL() {
 	try {
-	  gl = canvas.getContext("experimental-webgl");
-	  gl.viewportWidth = canvas.width;
-	  gl.viewportHeight = canvas.height;
+		canvas = document.getElementById("main");
+		gl = canvas.getContext("experimental-webgl");
+		gl.viewportWidth = canvas.width;
+		gl.viewportHeight = canvas.height;
 	} catch(e) {
 	}
 	if (!gl) {
