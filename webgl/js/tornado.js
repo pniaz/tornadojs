@@ -1,5 +1,32 @@
+$.holdReady( true );
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+var scripts = [
+		"js/glMatrix.js",
+		"js/tornado.obj.js",
+		"js/tornado.objloader.js",
+		"js/webgl.example1.js",
+	];
+
+function getScripts(){
+	name = scripts.shift();
+	$.getScript(name, function(){
+		console.log("Script "+ name +" loaded and executed.");
+		if(scripts.length > 0){
+			getScripts();
+		}
+		else{
+			$.holdReady( false );
+		}
+	});
+}
+getScripts();
+
 var TORNADO = { REVISION: '1' };
 
+
+
+/*
 TORNADO.Renderer = function ( canvas ) {
 	try {
 	  	this.gl = canvas.getContext("experimental-webgl");
@@ -34,4 +61,8 @@ TORNADO.Renderer.prototype = {
 		}
 		return -1;
 	},
-};
+}
+*/
+
+
+
