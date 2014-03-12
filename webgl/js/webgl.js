@@ -137,13 +137,13 @@ var objLoader = new OBJLoader();
 loadOBJ();
 
 function loadOBJ() {
-	    var url = "cubo.obj";
+	    var url = "./cubo.obj";
 	    objLoader.load(url, render);
 }
 	
-/*function localOBJ(e) {
-	    objLoader.local(e, render);
-}*/
+function localOBJ(ruta) {
+	    objLoader.local(ruta, render);
+}
 
 function render(obj) {
 		var instance = obj;
@@ -151,7 +151,7 @@ function render(obj) {
 		var numTriangles = instance.decode();
 
 		console.log('Numero de triangulos del cubo');
-		console.log(numTriangles):
+		console.log(numTriangles);
 		//update();
 }
 

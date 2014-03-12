@@ -55,22 +55,22 @@ OBJLoader.prototype.load = function(url, callback) {
 };
 
 // consume local file:     http://www.html5rocks.com/en/tutorials/file/dndfiles/
-OBJLoader.prototype.local = function(evt, callback) {
-    var files = evt.target.files; // FileList object
+OBJLoader.prototype.local = function(ruta, callback) {
+    
+    //var files = evt.target.files; // FileList object
 
-    var f = files[0];
+    var f = ruta;
     var reader = new FileReader();
 
     // Closure to capture the file information.
     reader.onload = (function(theFile) {
       //return function(e) {
-	
-	var result = theFile.target.result;		// my raw file data
-	var name = theFile.name;
-	return callback(new OBJ(result));
+      	var result = theFile.target.result;		// my raw file data
+      	var name = theFile.name;
+      	return callback(new OBJ(result));
       //};
     });
 
     // Read in the image file as a data URL.
-    reader.readAsText(f);
+    reader.readAsText(new File(f));
 }
