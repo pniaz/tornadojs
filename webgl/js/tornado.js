@@ -15,13 +15,14 @@ TORNADO.Loader.prototype  = {
 		"js/tornado.shadersLoader.js",
 		"js/webgl.example1.js"
 	],
-	loadScripts: function (){
+	loadTornado: function (){
+		$.holdReady( true );
 		var self = this;
 		name = this.scripts.shift(); 
 		$.getScript(name, function(){
 			console.log("Script "+ name +" loaded and executed."); 
 			if(self.scripts.length > 0){
-				self.loadScripts(); 
+				self.loadTornado(); 
 			} 
 			else $.holdReady( false ); 
 		}); 
@@ -58,9 +59,9 @@ TORNADO.Loader.prototype  = {
 
 
 /*LOADING TORNADO ENGINE*/
-$.holdReady( true );
+
 var loader = new TORNADO.Loader();
-loader.loadScripts();
+loader.loadTornado();
 
 
 
