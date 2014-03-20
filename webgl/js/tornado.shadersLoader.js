@@ -5,7 +5,7 @@
 TORNADO.ShadersLoader = function (gl) {
 	if(gl){ this.gl = gl; } else if (window.stop) {window.stop(); }
 	
-	this.program = gl.createProgram();
+	this.program = this.gl.createProgram();
 	this.shadersPaths = [
 		"shaders/fs/fragmentShader1.c",
     	"shaders/vs/vertexShader1.c"
@@ -21,9 +21,13 @@ TORNADO.ShadersLoader.prototype = {
 	shadersPaths: null,
 	shaders: null,
 
-	init: function (){
-		this.loadShaders();
+	initShaders: function (){
+		
+		for (var i = 0; i < this.shaders.length; i++) {
+			this.gl.attachShader(this.program, this.shaders[i]);
+		};
 		this.gl.linkProgram(this.program);
+		console.debug(this);
 
 		if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {alert("Could not initialise shaders."); }
 
@@ -36,7 +40,8 @@ TORNADO.ShadersLoader.prototype = {
 	loadShaders: function (){
 		var self = this;
 		loader.loadFiles(this.shadersPaths, function(results){
-			for (var i = 0; i < results.length; i++) {
+			
+			for (var i = 0; i < self.shaders.length; i++) {
 				var shader = null;
 				if(self.shadersPaths[i].indexOf("fs/") != -1)
 					shader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -46,16 +51,22 @@ TORNADO.ShadersLoader.prototype = {
 					console.error("Invalid shader "+self.shadersPaths[i]);
 					return null;
 				}
-
 				gl.shaderSource(shader,results[i]);
 				gl.compileShader(shader);
 				if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-					alert(gl.getShaderInfoLog(shader));
+					alert("Error al cargar el shader "+ self.shadersPaths[i] +": "+gl.getShaderInfoLog(shader));
 					return null;
 				}
-				self.gl.attachShader(self.program, shader);
 				self.shaders.push(shader);
+				self.initShaders();
 			}
-		}, function(error){});
+		}, 
+		function(error){});
 	}
 }
+/*
+Victoria Bueno - Periodista encargada Universitarios
+965 98 91 31
+
+Centralita - 965 98 91 00
+*/
