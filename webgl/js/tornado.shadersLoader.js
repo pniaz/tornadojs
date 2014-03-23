@@ -21,7 +21,7 @@ TORNADO.ShadersLoader.prototype = {
 	shadersPaths: null,
 	shaders: null,
 
-	initShaders: function (){
+	initShaders: function (callbackShadersLoaded){
 		
 		console.log("initShaders called");
 
@@ -39,8 +39,10 @@ TORNADO.ShadersLoader.prototype = {
 		this.program.pMatrixUniform = this.gl.getUniformLocation(this.program, "uPMatrix");
 		this.program.mvMatrixUniform = this.gl.getUniformLocation(this.program, "uMVMatrix");
 
+		return callbackShadersLoaded();
+
 	},
-	loadShaders: function (){
+	loadShaders: function (callbackShadersLoaded){
 
 		var self = this;
 		loader.loadFiles(this.shadersPaths, function(results){
@@ -63,7 +65,7 @@ TORNADO.ShadersLoader.prototype = {
 				}
 				self.shaders.push(shader);
 			}
-			self.initShaders();
+			self.initShaders(callbackShadersLoaded);
 		}, 
 		function(error){});
 	}

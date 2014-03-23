@@ -60,6 +60,7 @@ TORNADO.Loader.prototype  = {
 $.holdReady( true );
 var loader = new TORNADO.Loader();
 loader.loadScripts();
+
 /*
 var canvas = document.getElementById("main");
 var gl = canvas.getContext("experimental-webgl");

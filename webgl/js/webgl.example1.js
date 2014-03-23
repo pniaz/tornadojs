@@ -20,15 +20,17 @@ function initGL() {
 	  if (window.stop) {window.stop(); }
 	}
 }
+
+function callbackShadersLoaded () {
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.enable(gl.DEPTH_TEST);
+    drawScene();
+}
+
 function webGLStart() {
     initGL();
     initBuffers();
-    initShaders();
-
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    gl.enable(gl.DEPTH_TEST);
-
-    drawScene();
+    initShaders(callbackShadersLoaded);
 }
 
 
@@ -113,7 +115,7 @@ function getShader(gl, id) {
 }*/
 function initShaders() {
 
-	shadersLoader.loadShaders();
+	shadersLoader.loadShaders(callbackShadersLoaded);
 	shaderProgram = shadersLoader.program;
 
 /*
