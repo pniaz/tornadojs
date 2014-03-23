@@ -112,8 +112,10 @@ function getShader(gl, id) {
 	return shader;
 }*/
 function initShaders() {
+
 	shadersLoader.loadShaders();
 	shaderProgram = shadersLoader.program;
+
 /*
 	var vertexShader = getShader(gl, "shader-vs");
 	var fragmentShader = getShader(gl, "shader-fs");

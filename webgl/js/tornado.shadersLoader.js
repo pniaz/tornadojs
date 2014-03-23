@@ -46,7 +46,6 @@ TORNADO.ShadersLoader.prototype = {
 		loader.loadFiles(this.shadersPaths, function(results){
 			
 			for (var i = 0; i < self.shadersPaths.length; i++) {
-
 				var shader = null;
 				if(self.shadersPaths[i].indexOf("fs/") != -1)
 					shader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -63,8 +62,8 @@ TORNADO.ShadersLoader.prototype = {
 					return null;
 				}
 				self.shaders.push(shader);
-				self.initShaders();
 			}
+			self.initShaders();
 		}, 
 		function(error){});
 	}
