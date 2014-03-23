@@ -22,14 +22,16 @@ function initGL() {
 }
 function webGLStart() {
     initGL();
-    initShaders();
     initBuffers();
+    initShaders();
 
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.enable(gl.DEPTH_TEST);
 
     drawScene();
 }
+
+
 function initBuffers() {
     triangleVertexPositionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
