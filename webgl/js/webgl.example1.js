@@ -10,7 +10,7 @@ function initGL() {
 	try {
 		canvas = document.getElementById("main");
 		gl = canvas.getContext("experimental-webgl");
-		shadersLoader = new TORNADO.ShadersLoader(gl);
+		shadersLoader = new TORNADO.ShadersLoader(gl)
 		gl.viewportWidth = canvas.width;
 		gl.viewportHeight = canvas.height;
 	} catch(e) {
@@ -75,7 +75,7 @@ function drawScene() {
     setMatrixUniforms();
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, squareVertexPositionBuffer.numItems);
 }
-/*
+///*
 function getShader(gl, id) {
 	var shaderScript = document.getElementById(id);
 	if (!shaderScript) {
@@ -106,20 +106,18 @@ function getShader(gl, id) {
 	  alert(gl.getShaderInfoLog(shader));
 	  return null;
 	}
-	console.debug(shader);
+
 	return shader;
-}*/
+}//*/
 function initShaders() {
-	shadersLoader.loadShaders();
-	shaderProgram = shadersLoader.program;
-/*
-	var vertexShader = getShader(gl, "shader-vs");
+	//shadersLoader.init();
+///*
 	var fragmentShader = getShader(gl, "shader-fs");
+	var vertexShader = getShader(gl, "shader-vs");
 
 	shaderProgram = gl.createProgram();
 	gl.attachShader(shaderProgram, vertexShader);
 	gl.attachShader(shaderProgram, fragmentShader);
-
 	gl.linkProgram(shaderProgram);
 
 	if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
@@ -131,7 +129,7 @@ function initShaders() {
 	gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 	shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
-	*/
+	//*/
 }
 function setMatrixUniforms() {
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
