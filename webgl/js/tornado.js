@@ -61,7 +61,11 @@ TORNADO.Loader.prototype  = {
 /*LOADING TORNADO ENGINE*/
 
 var loader = new TORNADO.Loader();
+
 loader.loadTornado();
 
 
-
+/*
+var canvas = document.getElementById("main");
+var gl = canvas.getContext("experimental-webgl");
+*/

@@ -22,14 +22,16 @@ function initGL() {
 }
 function webGLStart() {
     initGL();
-    initShaders();
     initBuffers();
+    initShaders();
 
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.enable(gl.DEPTH_TEST);
 
     drawScene();
 }
+
+
 function initBuffers() {
     triangleVertexPositionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
@@ -75,7 +77,7 @@ function drawScene() {
     setMatrixUniforms();
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, squareVertexPositionBuffer.numItems);
 }
-///*
+/*
 function getShader(gl, id) {
 	var shaderScript = document.getElementById(id);
 	if (!shaderScript) {
@@ -108,10 +110,13 @@ function getShader(gl, id) {
 	}
 
 	return shader;
-}//*/
+}*/
 function initShaders() {
-	//shadersLoader.init();
-///*
+
+	shadersLoader.loadShaders();
+	shaderProgram = shadersLoader.program;
+
+/*
 	var fragmentShader = getShader(gl, "shader-fs");
 	var vertexShader = getShader(gl, "shader-vs");
 

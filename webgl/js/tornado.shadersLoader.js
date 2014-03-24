@@ -21,8 +21,15 @@ TORNADO.ShadersLoader.prototype = {
 	shadersPaths: null,
 	shaders: null,
 
-	init: function (){
-		this.loadShaders();
+	initShaders: function (callbackShadersLoaded){
+
+		
+		console.log("initShaders called");
+
+		for (var i = 0; i < this.shaders.length; i++) {
+			this.gl.attachShader(this.program, this.shaders[i]);
+		};
+
 		this.gl.linkProgram(this.program);
 
 		if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {alert("Could not initialise shaders."); }
@@ -32,11 +39,16 @@ TORNADO.ShadersLoader.prototype = {
 		this.gl.enableVertexAttribArray(this.program.vertexPositionAttribute);
 		this.program.pMatrixUniform = this.gl.getUniformLocation(this.program, "uPMatrix");
 		this.program.mvMatrixUniform = this.gl.getUniformLocation(this.program, "uMVMatrix");
+
 	},
 	loadShaders: function (){
+
 		var self = this;
 		loader.loadFiles(this.shadersPaths, function(results){
-			for (var i = 0; i < results.length; i++) {
+
+			
+			for (var i = 0; i < self.shadersPaths.length; i++) {
+
 				var shader = null;
 				if(self.shadersPaths[i].indexOf("fs/") != -1)
 					shader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -56,6 +68,12 @@ TORNADO.ShadersLoader.prototype = {
 				self.gl.attachShader(self.program, shader);
 				self.shaders.push(shader);
 			}
-		}, function(error){});
+
+
+			self.initShaders(callbackShadersLoaded);
+
+		}, 
+		function(error){});
+
 	}
 }
