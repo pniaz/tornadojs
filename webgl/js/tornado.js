@@ -15,13 +15,14 @@ TORNADO.Loader.prototype  = {
 		"js/tornado.shadersLoader.js",
 		"js/webgl.example1.js"
 	],
-	loadScripts: function (){
+	loadTornado: function (){
+		$.holdReady( true );
 		var self = this;
 		name = this.scripts.shift(); 
 		$.getScript(name, function(){
 			console.log("Script "+ name +" loaded and executed."); 
 			if(self.scripts.length > 0){
-				self.loadScripts(); 
+				self.loadTornado(); 
 			} 
 			else $.holdReady( false ); 
 		}); 
@@ -53,18 +54,18 @@ TORNADO.Loader.prototype  = {
 			this.loadFile(urls[i], i, partialCallback, errorCallback); 
 		} 
 	}
+
 } 
 
 
 /*LOADING TORNADO ENGINE*/
-$.holdReady( true );
+
 var loader = new TORNADO.Loader();
-loader.loadScripts();
+
+loader.loadTornado();
+
 
 /*
 var canvas = document.getElementById("main");
 var gl = canvas.getContext("experimental-webgl");
-
-var renderer = new TORNADO.Renderer(gl);
 */
-
