@@ -10,7 +10,7 @@ function initGL() {
 	try {
 		canvas = document.getElementById("main");
 		gl = canvas.getContext("experimental-webgl");
-		shadersLoader = new TORNADO.ShadersLoader(gl)
+		shadersLoader = new TORNADO.ShadersLoader(gl);
 		gl.viewportWidth = canvas.width;
 		gl.viewportHeight = canvas.height;
 	} catch(e) {
@@ -20,10 +20,6 @@ function initGL() {
 	  if (window.stop) {window.stop(); }
 	}
 }
-function webGLStart() {
-    initGL();
-    initBuffers();
-    initShaders();
 
 function webGLStart() {
     initGL();
