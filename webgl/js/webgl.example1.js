@@ -43,16 +43,11 @@ function initBuffers() {
     squareVertexPositionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
 
-    vertices = [
-         1.0,  1.0,  0.0,
-        -1.0,  1.0,  0.0,
-         1.0, -1.0,  0.0,
-        -1.0, -1.0,  0.0
-    ];
+    vertices = [1, -1, -1, 1, -1, 1, -1, -1, 1, -1, -1, -1, 1, 1, -0.999999, 0.999999, 1, 1.000001, -1, 1, 1, -1, 1, -1];
     
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
     squareVertexPositionBuffer.itemSize = 3;
-    squareVertexPositionBuffer.numItems = 4;
+    squareVertexPositionBuffer.numItems = vertices.length / 3;
 }
 
 function drawScene() {

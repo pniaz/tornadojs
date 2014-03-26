@@ -7,11 +7,12 @@ TORNADO.OBJ = function(data) {
   
   this.list_v = new Array();
   this.list_f = new Array();
-  this.listVertex = [];
-  this.list_vt = [];
-  this.list_vn = [];
-  this.listFace = [];
-  this.list_s = [];
+  this.listVertex = new Array();
+  this.list_vt = new Array();
+  this.list_vn = new Array();
+  this.listFace = new Array();
+  this.list_s = new Array();
+
 }
     
 TORNADO.OBJ.prototype = {
@@ -23,6 +24,19 @@ TORNADO.OBJ.prototype = {
 		for( var i=0; i<this.data.length; i++) 
 			this.parseLine(i);
 		return this.listFace.length;
+	},
+	getListVertexArray: function(){
+
+		var listVertexArray = new Array();
+
+		for (i in this.listVertex)
+		{
+			listVertexArray.push(this.listVertex[i][0]);
+			listVertexArray.push(this.listVertex[i][1]);
+			listVertexArray.push(this.listVertex[i][2]);
+		}
+
+		return listVertexArray;
 	},
 	parseLine: function(i) {
 		var list = this.data[i].replace("\r", "");
