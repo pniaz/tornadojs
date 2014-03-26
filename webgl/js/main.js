@@ -8,7 +8,7 @@ $( document ).ready(function() {
 	  var instance = obj;
 	  var numTriangles = instance.decode();
 
-	  console.debug(instance.getListVertexArray());
+	  console.debug(instance.list_vn);
 	}
 
 	loader.load("./cubo.obj", addOBJ);
