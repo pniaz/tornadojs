@@ -28,18 +28,20 @@ TORNADO.ShadersLoader.prototype = {
 		for (var i = 0; i < this.shaders.length; i++) {
 			this.gl.attachShader(this.program, this.shaders[i]);
 		};
+		
 		this.gl.linkProgram(this.program);
 		console.debug(this);
 
 		if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {alert("Could not initialise shaders."); }
 
 		this.gl.useProgram(this.program);
+		
 		this.program.vertexPositionAttribute = this.gl.getAttribLocation(this.program, "aVertexPosition");
 		this.gl.enableVertexAttribArray(this.program.vertexPositionAttribute);
 		
 		//lesson 2
-		this.program.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
-    	this.gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+		this.program.vertexColorAttribute = this.gl.getAttribLocation(this.program, "aVertexColor");
+    	this.gl.enableVertexAttribArray(this.program.vertexColorAttribute);
 		//lesson 2
 
 		this.program.pMatrixUniform = this.gl.getUniformLocation(this.program, "uPMatrix");
@@ -65,6 +67,7 @@ TORNADO.ShadersLoader.prototype = {
 				}
 				gl.shaderSource(shader,results[i]);
 				gl.compileShader(shader);
+				
 				if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
 					alert("Error al cargar el shader "+ self.shadersPaths[i] +": "+gl.getShaderInfoLog(shader));
 					return null;

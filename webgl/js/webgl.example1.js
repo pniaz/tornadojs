@@ -1,5 +1,6 @@
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
+var mvMatrixStack = [];
 
 var triangleVertexPositionBuffer;
 var triangleVertexColorBuffer;
@@ -7,9 +8,32 @@ var triangleVertexColorBuffer;
 var squareVertexPositionBuffer;
 var squareVertexColorBuffer;
 
+//lesson 3 - animation
+var rTri = 0;
+var rSquare = 0;
+var lastTime = 0;
+
+
 var gl;
 var shaderProgram;
 var shadersLoader;
+
+function mvPushMatrix() {
+    var copy = mat4.create();
+    mat4.set(mvMatrix, copy);
+    mvMatrixStack.push(copy);
+}
+
+function mvPopMatrix() {
+    if (mvMatrixStack.length == 0) {
+      throw "Invalid popMatrix!";
+    }
+    mvMatrix = mvMatrixStack.pop();
+}
+
+function degToRad(degrees) {
+    return degrees * Math.PI / 180;
+}
 
 function initGL() {
 	try {
@@ -29,7 +53,25 @@ function initGL() {
 function webGLStart() {
     initGL();
     initBuffers();
-    initShaders(drawScene);
+    initShaders(tick);
+}
+
+function animate() {
+    var timeNow = new Date().getTime();
+
+    if (lastTime != 0) {
+      var elapsed = timeNow - lastTime;
+
+      rTri += (90 * elapsed) / 1000.0;
+      rSquare += (75 * elapsed) / 1000.0;
+    }
+    lastTime = timeNow;
+}
+
+function tick() {
+    requestAnimFrame(tick);
+    drawScene();
+    animate();
 }
 
 
@@ -42,17 +84,20 @@ function initBuffers() {
         -1.0, -1.0,  0.0,
          1.0, -1.0,  0.0
     ];
+
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
     triangleVertexPositionBuffer.itemSize = 3;
     triangleVertexPositionBuffer.numItems = 3;
 
     triangleVertexColorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexColorBuffer);
+
     var colors = [
         1.0, 0.0, 0.0, 1.0,
         0.0, 1.0, 0.0, 1.0,
         0.0, 0.0, 1.0, 1.0
     ];
+
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
     triangleVertexColorBuffer.itemSize = 4;
     triangleVertexColorBuffer.numItems = 3;
@@ -66,6 +111,9 @@ function initBuffers() {
          1.0, -1.0,  0.0,
         -1.0, -1.0,  0.0
     ];
+
+   
+
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
     squareVertexPositionBuffer.itemSize = 3;
     squareVertexPositionBuffer.numItems = 4;
@@ -73,6 +121,7 @@ function initBuffers() {
     squareVertexColorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexColorBuffer);
     colors = []
+    
     for (var i=0; i < 4; i++) {
       colors = colors.concat([0.5, 0.5, 1.0, 1.0]);
     }
@@ -94,6 +143,9 @@ function drawScene() {
     
     mat4.translate(mvMatrix, [-1.5, 0.0, -7.0]);
 
+    mvPushMatrix();
+    mat4.rotate(mvMatrix, degToRad(rTri), [0, 1, 0]);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, triangleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
@@ -102,9 +154,15 @@ function drawScene() {
 
     setMatrixUniforms();
     gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBuffer.numItems);
+
+    mvPopMatrix();
+
     
     mat4.translate(mvMatrix, [3.0, 0.0, 0.0]);
-    
+
+    mvPushMatrix();
+    mat4.rotate(mvMatrix, degToRad(rSquare), [1, 0, 0]);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, squareVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
@@ -113,7 +171,12 @@ function drawScene() {
 
     setMatrixUniforms();
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, squareVertexPositionBuffer.numItems);
+
+    mvPopMatrix();
 }
+
+
+
 function initShaders(callback) {
 	shadersLoader.loadShaders(callback);
 	shaderProgram = shadersLoader.program;

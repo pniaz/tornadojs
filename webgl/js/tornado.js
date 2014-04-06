@@ -9,6 +9,7 @@ TORNADO.Loader.prototype  = {
 	constructor: TORNADO.Loader,
 
 	scripts: [
+		"js/webgl-utils.js",
 		"js/tornado.matrix.js",
 		"js/tornado.obj.js",
 		"js/tornado.objloader.js",

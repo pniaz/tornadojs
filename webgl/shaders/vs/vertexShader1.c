@@ -10,3 +10,4 @@ void main(void) {
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
 	vColor = aVertexColor;
 }
+
