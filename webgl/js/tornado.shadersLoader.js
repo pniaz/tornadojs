@@ -2,15 +2,17 @@
 	ShadersLoader class
 */
 
-TORNADO.ShadersLoader = function (gl) {
+TORNADO.ShadersLoader = function (gl,shaderProgram) {
 	if(gl){ this.gl = gl; } else if (window.stop) {window.stop(); }
 	
-	this.program = this.gl.createProgram();
+	this.program = shaderProgram;
 	this.shadersPaths = [
 		"shaders/fs/fragmentShader1.c",
     	"shaders/vs/vertexShader1.c"
 	];
 	this.shaders = [];
+
+	return this;
 };
 
 TORNADO.ShadersLoader.prototype = {
