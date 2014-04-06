@@ -36,6 +36,12 @@ TORNADO.ShadersLoader.prototype = {
 		this.gl.useProgram(this.program);
 		this.program.vertexPositionAttribute = this.gl.getAttribLocation(this.program, "aVertexPosition");
 		this.gl.enableVertexAttribArray(this.program.vertexPositionAttribute);
+		
+		//lesson 2
+		this.program.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
+    	this.gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+		//lesson 2
+
 		this.program.pMatrixUniform = this.gl.getUniformLocation(this.program, "uPMatrix");
 		this.program.mvMatrixUniform = this.gl.getUniformLocation(this.program, "uMVMatrix");
 

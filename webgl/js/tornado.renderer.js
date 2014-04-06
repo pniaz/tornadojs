@@ -23,7 +23,9 @@ TORNADO.Renderer.prototype = {
 	render: function ( scene, camera ) {
 		this.gl.viewport(0, 0, this.gl.viewportWidth, this.gl.viewportHeight);
     	gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);      					// Clear the color as well as the depth buffer.
+		
 		mat4.perspective(45, this.gl.viewportWidth / this.gl.viewportHeight, 0.1, 100.0, this.pMatrix);
+		
 		mat4.identity(mvMatrix);
 
 		//init bffers
