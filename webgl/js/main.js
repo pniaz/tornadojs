@@ -1,10 +1,20 @@
+var renderer;
+var scene;
+var camera;
+
+
 $( document ).ready(function() {
 	
-	//webGLStart();
 	var canvas = document.getElementById("main");
-	var scene = new TORNADO.Scene(canvas);
-	scene.sayHello();
-	scene.render();
+	
+	scene = new TORNADO.Scene(canvas);
+	renderer = new TORNADO.Renderer();
+
+	camera = null;
+
+	renderer.startRender(scene,camera);
+
+	//scene.sayHello();
 
 	var loader = new TORNADO.OBJLoader();
 
@@ -17,3 +27,6 @@ $( document ).ready(function() {
 
 	loader.load("./cubo.obj", addOBJ);
 });
+
+
+

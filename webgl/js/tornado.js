@@ -1,9 +1,13 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 function extend(base, sub) {sub.prototype = Object.create(base.prototype); sub.prototype.constructor = sub; Object.defineProperty(sub.prototype, 'constructor', {enumerable: false, value: sub }); }
 
+var gl;
+var shaderProgram;
+
 var TORNADO = { REVISION: '1' };
 
 TORNADO.Loader = function (){
+
 }
 TORNADO.Loader.prototype  = {
 	constructor: TORNADO.Loader,
