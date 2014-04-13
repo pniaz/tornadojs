@@ -11,17 +11,21 @@ $( document ).ready(function() {
 
 	var pyramid = new TORNADO.Mesh();
 	pyramid.addVertex( 0.0,  1.0,  0.0, "cyan");
-	pyramid.addVertex(-1.0, -1.0,  1.0, "cyan");
-	pyramid.addVertex( 1.0, -1.0,  1.0, "cyan");
+	pyramid.addVertex(-1.0, -1.0,  1.0, "green");
+	pyramid.addVertex( 1.0, -1.0,  1.0, "blue");
+
 	pyramid.addVertex( 0.0,  1.0,  0.0, "green");
-	pyramid.addVertex( 1.0, -1.0,  1.0, "green");
-	pyramid.addVertex( 1.0, -1.0, -1.0, "green");
+	pyramid.addVertex( 1.0, -1.0,  1.0, "cyan");
+	pyramid.addVertex( 1.0, -1.0, -1.0, "blue");
+	
 	pyramid.addVertex( 0.0,  1.0,  0.0, "blue");
 	pyramid.addVertex( 1.0, -1.0, -1.0, "blue");
 	pyramid.addVertex(-1.0, -1.0, -1.0, "blue");
+	
 	pyramid.addVertex( 0.0,  1.0,  0.0, "yellow");
 	pyramid.addVertex(-1.0, -1.0, -1.0, "yellow");
 	pyramid.addVertex(-1.0, -1.0,  1.0, "yellow");
+	
 	pyramid.prepare();
 	scene.addChild(new TORNADO.Node(pyramid));
 
@@ -32,14 +36,15 @@ $( document ).ready(function() {
 
 	var loader = new TORNADO.OBJLoader();
 
-	function addOBJ (obj) {
-	  var instance = obj;
-	  var numTriangles = instance.decode();
-
-	  console.debug(instance.getListVertexArray());
-	}
-
-	loader.load("./cubo.obj", addOBJ);
+	loader.load("./cubo.obj", function(obj){
+	  	var numTriangles = obj.decode();
+		var vertexCube = obj.getListVertexArray();
+		
+		var cubo = new TORNADO.Mesh();
+		cubo.addListVertex(vertexCube);
+		cubo.prepare();
+		scene.addChild(new TORNADO.Node(cubo));
+	});
 });
 
 

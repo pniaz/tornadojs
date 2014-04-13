@@ -22,6 +22,22 @@ TORNADO.Mesh.prototype.addVertex = function(x,y,z,color){
 		this.vertexArray.push(vertex);
 	}
 }
+TORNADO.Mesh.prototype.addListVertex = function(listVertex){
+
+	for (var i=0; i<listVertex.length; i+=3)
+	{
+		var color = "yellow";
+		if(i%3==1)
+			color = "red";
+		else if (i%3 == 2)
+			color = "green";
+
+		this.addVertex(listVertex[i],listVertex[i+1],listVertex[i+2],color) ;
+	}		
+
+	console.debug(this.vertexArray);
+
+}
 TORNADO.Mesh.prototype.getVertexBuffer = function(){
 	var list = new Array();
 
@@ -58,7 +74,7 @@ TORNADO.Mesh.prototype.beginDraw = function(){
     gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-    gl.drawArrays(gl.TRIANGLES, 0, this.vertexBuffer.numItems);
+    gl.drawArrays(gl.TRIANGLE_FAN, 0, this.vertexBuffer.numItems);
 }
 TORNADO.Mesh.prototype.endDraw = function(){
 }

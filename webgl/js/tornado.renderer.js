@@ -85,12 +85,11 @@ TORNADO.Renderer.prototype = {
         sceneActual = scene;
         cameraActual = camera;
 
-        this.shadersLoader.loadShaders(shaderLoaded);
+        this.shadersLoader.loadShaders(function() {
+            charged = true;
+        });
         loop();
     }
-}
-function shaderLoaded() {
-    charged = true;
 }
 
 function loop(){
