@@ -3,7 +3,7 @@
 */
 
 TORNADO.ShadersLoader = function (gl,shaderProgram) {
-	if(gl){ this.gl = gl; } else if (window.stop) {window.stop(); }
+	if(gl){ gl = gl; } else if (window.stop) {window.stop(); }
 	
 	this.program = shaderProgram;
 	this.shadersPaths = [
@@ -11,6 +11,7 @@ TORNADO.ShadersLoader = function (gl,shaderProgram) {
     	"shaders/vs/vertexShader1.c"
 	];
 	this.shaders = [];
+
 
 	return this;
 };
@@ -28,26 +29,26 @@ TORNADO.ShadersLoader.prototype = {
 		console.log("initShaders called");
 
 		for (var i = 0; i < this.shaders.length; i++) {
-			this.gl.attachShader(this.program, this.shaders[i]);
+			gl.attachShader(this.program, this.shaders[i]);
 		};
 		
-		this.gl.linkProgram(this.program);
+		gl.linkProgram(this.program);
 		console.debug(this);
 
-		if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {alert("Could not initialise shaders."); }
+		if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {alert("Could not initialise shaders."); }
 
-		this.gl.useProgram(this.program);
+		gl.useProgram(this.program);
 		
-		this.program.vertexPositionAttribute = this.gl.getAttribLocation(this.program, "aVertexPosition");
-		this.gl.enableVertexAttribArray(this.program.vertexPositionAttribute);
+		this.program.vertexPositionAttribute = gl.getAttribLocation(this.program, "aVertexPosition");
+		gl.enableVertexAttribArray(this.program.vertexPositionAttribute);
 		
 		//lesson 2
-		this.program.vertexColorAttribute = this.gl.getAttribLocation(this.program, "aVertexColor");
-    	this.gl.enableVertexAttribArray(this.program.vertexColorAttribute);
+		this.program.vertexColorAttribute = gl.getAttribLocation(this.program, "aVertexColor");
+    	gl.enableVertexAttribArray(this.program.vertexColorAttribute);
 		//lesson 2
 
-		this.program.pMatrixUniform = this.gl.getUniformLocation(this.program, "uPMatrix");
-		this.program.mvMatrixUniform = this.gl.getUniformLocation(this.program, "uMVMatrix");
+		this.program.pMatrixUniform = gl.getUniformLocation(this.program, "uPMatrix");
+		this.program.mvMatrixUniform = gl.getUniformLocation(this.program, "uMVMatrix");
 
 		return callbackShadersLoaded();
 
@@ -60,17 +61,17 @@ TORNADO.ShadersLoader.prototype = {
 			for (var i = 0; i < self.shadersPaths.length; i++) {
 				var shader = null;
 				if(self.shadersPaths[i].indexOf("fs/") != -1)
-					shader = self.gl.createShader(self.gl.FRAGMENT_SHADER);
+					shader = gl.createShader(gl.FRAGMENT_SHADER);
 				else if(self.shadersPaths[i].indexOf("vs/") != -1)
-					shader = self.gl.createShader(self.gl.VERTEX_SHADER);
+					shader = gl.createShader(gl.VERTEX_SHADER);
 				else{
 					console.error("Invalid shader "+self.shadersPaths[i]);
 					return null;
 				}
-				self.gl.shaderSource(shader,results[i]);
-				self.gl.compileShader(shader);
+				gl.shaderSource(shader,results[i]);
+				gl.compileShader(shader);
 				
-				if (!self.gl.getShaderParameter(shader, self.gl.COMPILE_STATUS)) {
+				if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
 					alert("Error al cargar el shader "+ self.shadersPaths[i] +": "+gl.getShaderInfoLog(shader));
 					return null;
 				}
