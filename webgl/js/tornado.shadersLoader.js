@@ -60,17 +60,17 @@ TORNADO.ShadersLoader.prototype = {
 			for (var i = 0; i < self.shadersPaths.length; i++) {
 				var shader = null;
 				if(self.shadersPaths[i].indexOf("fs/") != -1)
-					shader = gl.createShader(gl.FRAGMENT_SHADER);
+					shader = self.gl.createShader(self.gl.FRAGMENT_SHADER);
 				else if(self.shadersPaths[i].indexOf("vs/") != -1)
-					shader = gl.createShader(gl.VERTEX_SHADER);
+					shader = self.gl.createShader(self.gl.VERTEX_SHADER);
 				else{
 					console.error("Invalid shader "+self.shadersPaths[i]);
 					return null;
 				}
-				gl.shaderSource(shader,results[i]);
-				gl.compileShader(shader);
+				self.gl.shaderSource(shader,results[i]);
+				self.gl.compileShader(shader);
 				
-				if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+				if (!self.gl.getShaderParameter(shader, self.gl.COMPILE_STATUS)) {
 					alert("Error al cargar el shader "+ self.shadersPaths[i] +": "+gl.getShaderInfoLog(shader));
 					return null;
 				}

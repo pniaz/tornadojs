@@ -1,10 +1,9 @@
 /*
 	Node class
 */
+
 TORNADO.Node = function () {
-
-	return this;
-
+	this.children = [];
 };
 
 TORNADO.Node.prototype = {
@@ -13,10 +12,11 @@ TORNADO.Node.prototype = {
 
 	entity: null, 
 	dad: null,
-	children: new array(), 
+	children: null, 
 
-	setEntity: function ( value ) {
-		if ( value instanceof TORNADO.Entity ) {
+	setEntity: function (value) {
+
+		if (value instanceof TORNADO.Entity) {
 			this.entity = value;
 			return true;
 		}
@@ -25,11 +25,17 @@ TORNADO.Node.prototype = {
 	getEntity: function(){
 		return this.entity;
 	},
-	addChild: function ( node ) {
-		if ( node instanceof THREE.Node ) {
-			return this.hijos.push(nodo);
+	addChild: function (node) {
+		if (node instanceof TORNADO.Node) {
+			return this.children.push(node);
 		}
 		return false;
+	},
+	remChildByIndex: function (index){
+		if(this.children.length>index){
+			return this.children.splice(index, 1);
+		}
+		else return false;
 	},
 	remChildByNode: function (node) {
 		var index = this.children.indexOf(node);
@@ -38,14 +44,8 @@ TORNADO.Node.prototype = {
 		}
 		else return false;
 	},
-	remChildByIndex: function (index){
-		if(this.children.length>index){
-			return this.children.splice(index, 1);
-		}
-		else 
-	},
 	setDad: function (dad){
-		if ( node instanceof THREE.Node ) {
+		if (dad instanceof TORNADO.Node) {
 			this.dad = dad;
 			return true;
 		}

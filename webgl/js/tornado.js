@@ -15,7 +15,11 @@ TORNADO.Loader.prototype  = {
 		"js/tornado.objloader.js",
 		"js/tornado.renderer.js",
 		"js/tornado.shadersLoader.js",
-		"js/webgl.example1.js"
+		"js/tornado.entity.js",
+		"js/tornado.node.js",
+		"js/tornado.resource.js",
+		"js/tornado.resourcesManager.js",
+		"js/tornado.scene.js"
 	],
 	loadScripts: function (){
 		var self = this;

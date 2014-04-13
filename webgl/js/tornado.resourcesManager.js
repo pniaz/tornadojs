@@ -10,7 +10,7 @@ TORNADO.ResourceManager = function () {
 TORNADO.ResourceManager.prototype = {
 
 	constructor: TORNADO.ResourceManager,
-	resources: new array(), 
+	resources: [], 
 
 	getResource: function (name){
 		var resourceIndex = -1;
