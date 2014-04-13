@@ -4,6 +4,7 @@
 TORNADO.Mesh = function () {
 	Entity.call(this);
 };
+
 extend(Entity, Mesh);
 
 TORNADO.Mesh.prototype.mesh = null;
