@@ -1,6 +1,8 @@
 /*
 	Mesh class
 */
+var rend;
+
 TORNADO.Scene = function (canvas) {
 	//Node.call(this);
 	try{
@@ -19,8 +21,35 @@ TORNADO.Scene = function (canvas) {
 	this.shadersLoader = new TORNADO.ShadersLoader(this.gl,this.shaderProgram);
 	this.resourceManager = new TORNADO.ResourceManager();
 	this.renderer = new TORNADO.Renderer(this.gl, this.shaderProgram);	
+
+	rend = this.renderer;
 };
 
+extend(TORNADO.Node, TORNADO.Scene);
+
+TORNADO.Scene.prototype.gl = null;
+TORNADO.Scene.prototype.shaderProgram = null;
+TORNADO.Scene.prototype.shaderLoader = null;
+TORNADO.Scene.prototype.resourceManager = null;
+TORNADO.Scene.prototype.renderer = null;
+
+TORNADO.Scene.prototype.render = function() {
+
+	//this.draw();
+
+	var pyramidVertexPositionBuffer = 0;
+	var pyramidVertexColorBuffer = 0;
+
+	this.renderer.initBuffers();
+	this.shadersLoader.loadShaders(tick);
+};
+
+function tick(){
+
+	requestAnimFrame(tick);
+    rend.render();
+    animate();
+};
 
 var lastTime = 0;
 var rPyramid = 0;
@@ -35,26 +64,3 @@ function animate() {
     lastTime = timeNow;
 }
 
-//extend(Node, Scene);
-
-TORNADO.Scene.prototype.gl = null;
-TORNADO.Scene.prototype.shaderProgram = null;
-TORNADO.Scene.prototype.shaderLoader = null;
-TORNADO.Scene.prototype.resourceManager = null;
-TORNADO.Scene.prototype.renderer = null;
-
-
-TORNADO.Scene.prototype.render = function() {
-
-	var pyramidVertexPositionBuffer = 0;
-	var pyramidVertexColorBuffer = 0;
-	this.renderer.initBuffers();
-
-	this.shadersLoader.loadShaders(this.tick);
-};
-TORNADO.Scene.prototype.tick = function(){
-
-	requestAnimFrame(this.tick);
-    this.renderer.render();
-    animate();
-};

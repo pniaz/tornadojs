@@ -60,5 +60,8 @@ TORNADO.Node.prototype = {
 			this.children[i].draw();
 		}
 		this.entity.endDraw();
+	},
+	sayHello: function(){
+		console.log("Hellloooooooo");
 	}
 };

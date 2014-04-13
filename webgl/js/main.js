@@ -3,6 +3,7 @@ $( document ).ready(function() {
 	//webGLStart();
 	var canvas = document.getElementById("main");
 	var scene = new TORNADO.Scene(canvas);
+	scene.sayHello();
 	scene.render();
 
 	var loader = new TORNADO.OBJLoader();
