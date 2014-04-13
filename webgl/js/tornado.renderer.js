@@ -130,7 +130,7 @@ TORNADO.Renderer.prototype = {
 	    mat4.translate(this.mvMatrix, [-1.5, 0.0, -7.0]);
 
 	    this.mvPushMatrix();
-	    mat4.rotate(this.mvMatrix, this.degToRad(rPyramid), [0, 1, 0]);
+	    //mat4.rotate(this.mvMatrix, this.degToRad(rPyramid), [0, 1, 0]);
 
 	    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, pyramidVertexPositionBuffer);
 	    this.gl.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, pyramidVertexPositionBuffer.itemSize, this.gl.FLOAT, false, 0, 0);

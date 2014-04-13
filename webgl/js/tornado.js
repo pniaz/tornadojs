@@ -11,6 +11,8 @@ TORNADO.Loader.prototype  = {
 	scripts: [
 		"js/webgl-utils.js",
 		"js/tornado.matrix.js",
+		"js/tornado.color.js",
+		"js/tornado.vertex.js",
 		"js/tornado.obj.js",
 		"js/tornado.objloader.js",
 		"js/tornado.renderer.js",
@@ -66,11 +68,3 @@ TORNADO.Loader.prototype  = {
 $.holdReady( true );
 var loader = new TORNADO.Loader();
 loader.loadScripts();
-
-/*
-var canvas = document.getElementById("main");
-var gl = canvas.getContext("experimental-webgl");
-
-var renderer = new TORNADO.Renderer(gl);
-*/
-
