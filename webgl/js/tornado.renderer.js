@@ -1,8 +1,6 @@
 /*
 	Rederer class
 */
-var pyramidVertexPositionBuffer = [];
-var pyramidVertexColorBuffer = [];
 var charged = false;
 
 var sceneActual;
@@ -62,73 +60,10 @@ TORNADO.Renderer.prototype = {
     	gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, this.mvMatrix);
 	},
 
-	initBuffers: function(){
-
-		console.log("initBuffers called");
-
-   		pyramidVertexPositionBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, pyramidVertexPositionBuffer);
-       
-        var vertices = [
-            // Front face
-             0.0,  1.0,  0.0,
-            -1.0, -1.0,  1.0,
-             1.0, -1.0,  1.0,
-
-            // Right face
-             0.0,  1.0,  0.0,
-             1.0, -1.0,  1.0,
-             1.0, -1.0, -1.0,
-
-            // Back face
-             0.0,  1.0,  0.0,
-             1.0, -1.0, -1.0,
-            -1.0, -1.0, -1.0,
-
-            // Left face
-             0.0,  1.0,  0.0,
-            -1.0, -1.0, -1.0,
-            -1.0, -1.0,  1.0
-        ];
-
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-        pyramidVertexPositionBuffer.itemSize = 3;
-        pyramidVertexPositionBuffer.numItems = 12;
-
-        pyramidVertexColorBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, pyramidVertexColorBuffer);
-       
-        var colors = [
-            // Front face
-            1.0, 0.0, 0.0, 1.0,
-            0.0, 1.0, 0.0, 1.0,
-            0.0, 0.0, 1.0, 1.0,
-
-            // Right face
-            1.0, 0.0, 0.0, 1.0,
-            0.0, 0.0, 1.0, 1.0,
-            0.0, 1.0, 0.0, 1.0,
-
-            // Back face
-            1.0, 0.0, 0.0, 1.0,
-            0.0, 1.0, 0.0, 1.0,
-            0.0, 0.0, 1.0, 1.0,
-
-            // Left face
-            1.0, 0.0, 0.0, 1.0,
-            0.0, 0.0, 1.0, 1.0,
-            0.0, 1.0, 0.0, 1.0
-        ];
-
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
-        pyramidVertexColorBuffer.itemSize = 4;
-        pyramidVertexColorBuffer.numItems = 12;
-	},
-
 	render: function (scene, camera) {
 
 	    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-	    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+	    //gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	    
 	    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, this.pMatrix);
 	    
@@ -137,18 +72,11 @@ TORNADO.Renderer.prototype = {
 	    mat4.translate(this.mvMatrix, [-1.5, 0.0, -7.0]);
 
 	    this.mvPushMatrix();
-	    //mat4.rotate(this.mvMatrix, this.degToRad(rPyramid), [0, 1, 0]);
+	    mat4.rotate(this.mvMatrix, this.degToRad(rPyramid), [0, 1, 0]);
 
-	    gl.bindBuffer(gl.ARRAY_BUFFER, pyramidVertexPositionBuffer);
-	    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, pyramidVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-	    
-	    gl.bindBuffer(gl.ARRAY_BUFFER, pyramidVertexColorBuffer);
-	    gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, pyramidVertexColorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        scene.draw();
 
 	    this.setMatrixUniforms();
-
-	    gl.drawArrays(gl.TRIANGLES, 0, pyramidVertexPositionBuffer.numItems);
-
 	   	this.mvPopMatrix();
 	},
 
@@ -157,20 +85,17 @@ TORNADO.Renderer.prototype = {
         sceneActual = scene;
         cameraActual = camera;
 
-        this.initBuffers();
-        this.shadersLoader.loadShaders(finishLoader);
-
-        tick();
+        this.shadersLoader.loadShaders(shaderLoaded);
+        loop();
     }
 }
-function finishLoader()
-{
+function shaderLoaded() {
     charged = true;
 }
 
-function tick(){
+function loop(){
 
-    requestAnimFrame(tick);
+    requestAnimFrame(loop);
 
     if(charged)
     {

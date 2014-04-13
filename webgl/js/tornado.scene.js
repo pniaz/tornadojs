@@ -3,7 +3,7 @@
 */
 
 TORNADO.Scene = function (canvas) {
-	//Node.call(this);
+	TORNADO.Node.call(this);
 	
 	try{
 		gl = canvas.getContext("experimental-webgl");

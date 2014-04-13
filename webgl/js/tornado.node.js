@@ -2,8 +2,9 @@
 	Node class
 */
 
-TORNADO.Node = function () {
+TORNADO.Node = function (entity) {
 	this.children = [];
+	this.entity = entity || null;
 };
 
 TORNADO.Node.prototype = {
@@ -27,7 +28,8 @@ TORNADO.Node.prototype = {
 	},
 	addChild: function (node) {
 		if (node instanceof TORNADO.Node) {
-			return this.children.push(node);
+			this.children.push(node);
+			return true;
 		}
 		return false;
 	},
@@ -55,13 +57,15 @@ TORNADO.Node.prototype = {
 		return this.dad;
 	},
 	draw: function(){
-		this.entity.beginDraw();
+		if(this.entity)
+			this.entity.beginDraw();
 		for (i in this.children) {
 			this.children[i].draw();
 		}
-		this.entity.endDraw();
+		if(this.entity)
+			this.entity.endDraw();
 	},
 	sayHello: function(){
-		console.log("Hellloooooooo");
+		console.log("Hello");
 	}
 };

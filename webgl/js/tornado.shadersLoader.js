@@ -2,10 +2,8 @@
 	ShadersLoader class
 */
 
-TORNADO.ShadersLoader = function (gl,shaderProgram) {
-	if(gl){ gl = gl; } else if (window.stop) {window.stop(); }
+TORNADO.ShadersLoader = function () {
 	
-	this.program = shaderProgram;
 	this.shadersPaths = [
 		"shaders/fs/fragmentShader1.c",
     	"shaders/vs/vertexShader1.c"
@@ -19,8 +17,6 @@ TORNADO.ShadersLoader = function (gl,shaderProgram) {
 TORNADO.ShadersLoader.prototype = {
 
 	constructor: TORNADO.ShadersLoader,
-	gl: null,
-	program: null,
 	shadersPaths: null,
 	shaders: null,
 
@@ -29,26 +25,25 @@ TORNADO.ShadersLoader.prototype = {
 		console.log("initShaders called");
 
 		for (var i = 0; i < this.shaders.length; i++) {
-			gl.attachShader(this.program, this.shaders[i]);
+			gl.attachShader(shaderProgram, this.shaders[i]);
 		};
 		
-		gl.linkProgram(this.program);
-		console.debug(this);
+		gl.linkProgram(shaderProgram);
 
-		if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {alert("Could not initialise shaders."); }
+		if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {alert("Could not initialise shaders."); }
 
-		gl.useProgram(this.program);
+		gl.useProgram(shaderProgram);
 		
-		this.program.vertexPositionAttribute = gl.getAttribLocation(this.program, "aVertexPosition");
-		gl.enableVertexAttribArray(this.program.vertexPositionAttribute);
+		shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+		gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 		
 		//lesson 2
-		this.program.vertexColorAttribute = gl.getAttribLocation(this.program, "aVertexColor");
-    	gl.enableVertexAttribArray(this.program.vertexColorAttribute);
+		shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
+    	gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
 		//lesson 2
 
-		this.program.pMatrixUniform = gl.getUniformLocation(this.program, "uPMatrix");
-		this.program.mvMatrixUniform = gl.getUniformLocation(this.program, "uMVMatrix");
+		shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+		shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 
 		return callbackShadersLoaded();
 
