@@ -31,7 +31,6 @@ TORNADO.Renderer.prototype = {
 	gl: null, 
 	mvMatrix: null, 
 	pMatrix: null, 
-	shaderProgram: null,
 	mvMatrixStack:null,
     shaderProgram:null,
     shadersLoader:null,
@@ -76,7 +75,8 @@ TORNADO.Renderer.prototype = {
 
         scene.draw();
 
-	    this.setMatrixUniforms();
+        this.setMatrixUniforms();
+        
 	   	this.mvPopMatrix();
 	},
 

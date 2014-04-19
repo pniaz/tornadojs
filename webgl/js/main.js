@@ -10,6 +10,7 @@ $( document ).ready(function() {
 	scene = new TORNADO.Scene(canvas);
 
 	var pyramid = new TORNADO.Mesh();
+	
 	pyramid.addVertex( 0.0,  1.0,  0.0, "cyan");
 	pyramid.addVertex(-1.0, -1.0,  1.0, "green");
 	pyramid.addVertex( 1.0, -1.0,  1.0, "blue");
@@ -27,24 +28,30 @@ $( document ).ready(function() {
 	pyramid.addVertex(-1.0, -1.0,  1.0, "yellow");
 	
 	pyramid.prepare();
-	scene.addChild(new TORNADO.Node(pyramid));
 
-	renderer = new TORNADO.Renderer();
-	renderer.startRender(scene,camera);
+	//scene.addChild(new TORNADO.Node(pyramid));
 
-	console.debug(scene);
+	//console.debug(scene);
 
 	var loader = new TORNADO.OBJLoader();
 
 	loader.load("./cubo.obj", function(obj){
+	  	
 	  	var numTriangles = obj.decode();
-		var vertexCube = obj.getListVertexArray();
 		
+		console.debug(obj.getListVertexArray());
+		console.debug(obj.getListFaceArray());
+
+		var vertexCube = obj.getListVertexArray();
+
 		var cubo = new TORNADO.Mesh();
 		cubo.addListVertex(vertexCube);
 		cubo.prepare();
-		scene.addChild(new TORNADO.Node(cubo));
+		//scene.addChild(new TORNADO.Node(cubo));
 	});
+
+	renderer = new TORNADO.Renderer();
+	renderer.startRender(scene,camera);
 });
 
 

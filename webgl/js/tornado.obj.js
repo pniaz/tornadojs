@@ -38,6 +38,23 @@ TORNADO.OBJ.prototype = {
 
 		return listVertexArray;
 	},
+	getListFaceArray: function (){
+
+		var listFaceArray = new Array();
+
+		for (i in this.listFace)
+		{
+
+			for (j in this.listFace[i])
+			{
+				if(j != 0)
+					listFaceArray.push(this.listFace[i][j]);
+			}
+		}
+
+		return listFaceArray;
+
+	},
 	parseLine: function(i) {
 		var list = this.data[i].replace("\r", "");
 		list = list.split(" ");
