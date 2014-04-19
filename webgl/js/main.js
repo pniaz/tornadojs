@@ -38,11 +38,12 @@ $( document ).ready(function() {
 	loader.load("./cubo.obj", function(obj){
 	  	
 	  	var numTriangles = obj.decode();
-		
-		console.debug(obj.getListVertexArray());
-		console.debug(obj.getListFaceArray());
-
+	
 		var vertexCube = obj.getListVertexArray();
+		var faceCube = obj.getListFaceArray();
+
+		console.debug(vertexCube);
+		console.debug(faceCube);
 
 		var cubo = new TORNADO.Mesh();
 		cubo.addListVertex(vertexCube);

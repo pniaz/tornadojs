@@ -5,6 +5,7 @@ TORNADO.Mesh = function () {
 	TORNADO.Entity.call(this);
 
 	this.vertexArray = [];
+	this.faceArray = [];
 
 	this.vertexBuffer = [];
 	this.colorBuffer = [];
