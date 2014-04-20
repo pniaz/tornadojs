@@ -1,11 +1,14 @@
 TORNADO.Vertex = function ( x,y,z, color) {
 
-	this.x = x;
-	this.y = y;
-	this.z = z;
+	if(x && x != undefined)
+		this.x = x;
+	if(y && y != undefined)
+		this.y = y;
+	if(z && z != undefined)
+		this.z = z;
 
 	this.color = new TORNADO.Color();
-	if ( color !== undefined )
+	if (color && color !== undefined )
 		this.color.set( color );
 	return this;
 
@@ -15,7 +18,7 @@ TORNADO.Vertex.prototype = {
 
 	constructor: TORNADO.Vertex,
 
-	x: 1, y: 1, z: 1, color:null,
+	x: 0, y: 0, z: 0, color:null,
 
 	setX: function ( value ) {
 		this.x = value;
@@ -25,6 +28,14 @@ TORNADO.Vertex.prototype = {
 	},
 	setZ: function ( value ) {
 		this.z = value;
+	},
+	setPosition: function(x,y,z){
+		if(x && x != undefined)
+			this.setX(x);
+		if(y && y != undefined)
+			this.setY(y);
+		if(z && z != undefined)
+			this.setX(z);
 	},
 	setColor: function ( value ) {
 		this.color.set(value);
