@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	
 	pyramid.prepare();
 
-	//scene.addChild(new TORNADO.Node(pyramid));
+	scene.addChild(new TORNADO.Node(pyramid));
 
 	//console.debug(scene);
 
