@@ -43,11 +43,13 @@ TORNADO.Mesh.prototype.addListVertex = function(listVertex){
 
 	for (var i=0; i<listVertex.length; i+=3)
 	{
-		var color = "yellow";
-		if(i%3==1)
-			color = "red";
-		else if (i%3 == 2)
+		var color = "red";
+		
+		if(i%6==0)
 			color = "green";
+
+		
+		
 
 		this.addVertex(listVertex[i],listVertex[i+1],listVertex[i+2],color);
 	}		

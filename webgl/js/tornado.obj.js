@@ -41,19 +41,16 @@ TORNADO.OBJ.prototype = {
 	getListFaceArray: function (){
 
 		var listFaceArray = new Array();
-
-		for (i in this.listFace)
-		{
-
-			for (j in this.listFace[i])
-			{
+		var aux = new Array();
+		for (i in this.listFace){
+			for (j in this.listFace[i]){
 				if(j != 0)
-					listFaceArray.push(this.listFace[i][j]);
+					aux.push(this.listFace[i][j]);
 			}
+			listFaceArray.push(aux);
+			aux = new Array();
 		}
-
 		return listFaceArray;
-
 	},
 	parseLine: function(i) {
 		var list = this.data[i].replace("\r", "");
