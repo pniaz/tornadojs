@@ -42,13 +42,29 @@ $(document ).ready(function() {
 		var cubo = new TORNADO.Mesh();
 		cubo.addListVertex(vertexCube);
 		cubo.addListIndex(indices);
+
 		cubo.prepare();
 		scene.addChild(new TORNADO.Node(cubo));
 		
 	});
 
+
+	var lastTime = 0;
+	var rPyramid = 0;
 	renderer = new TORNADO.Renderer();
-	renderer.startRender(scene,camera);
+
+	renderer.startRender(scene,camera, function(){
+        renderer.render(scene,camera);
+        /*
+        var timeNow = new Date().getTime();
+
+	    if (lastTime != 0) {
+	      var elapsed = timeNow - lastTime;
+	      rPyramid += (90 * elapsed) / 1000.0;
+	    }
+	    lastTime = timeNow;
+		*/
+	});
 });
 
 
