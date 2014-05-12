@@ -37,6 +37,7 @@ $(document ).ready(function() {
 		var vertexCube = obj.getListVertexArray();
 		var facesCube = obj.getListFaceArray();
 		var indices = obj.getListIndexArray(facesCube);
+		console.log(facesCube);
 			
 		var cubo = new TORNADO.Mesh();
 		cubo.addListVertex(vertexCube);
