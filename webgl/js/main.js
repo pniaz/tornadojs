@@ -3,7 +3,7 @@ var scene;
 var camera;
 
 
-$( document ).ready(function() {
+$(document ).ready(function() {
 	
 	var canvas = document.getElementById("main");
 	
@@ -33,36 +33,14 @@ $( document ).ready(function() {
 	loader.load("./mono.obj", function(obj){
 	  	
 	  	var numTriangles = obj.decode();
-	
+
 		var vertexCube = obj.getListVertexArray();
-		var faceCube = obj.getListFaceArray();
-
-		var indices = new Array();
-
-		for(var i=0; i<faceCube.length;i++){
-
-			var cara = faceCube[i];
-
-			for(var j=0; j<cara.length;j++){
-				indices.push(cara[j]);
-				
-				if(j+1 >= cara.length)
-					indices.push(cara[0]);
-				else
-					indices.push(cara[j+1]);
-
-				if(j+2 >= cara.length)
-					indices.push(cara[1]);
-				else
-					indices.push(cara[j+2]);
-			}
-		}
-		
+		var facesCube = obj.getListFaceArray();
+		var indices = obj.getListIndexArray(facesCube);
+			
 		var cubo = new TORNADO.Mesh();
-
 		cubo.addListVertex(vertexCube);
 		cubo.addListIndex(indices);
-
 		cubo.prepare();
 		scene.addChild(new TORNADO.Node(cubo));
 		

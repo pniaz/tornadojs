@@ -52,6 +52,30 @@ TORNADO.OBJ.prototype = {
 		}
 		return listFaceArray;
 	},
+	getListIndexArray: function(faceCube){
+		
+		var indices = new Array();
+
+		for(var i=0; i<faceCube.length;i++){
+
+			var cara = faceCube[i];
+
+			for(var j=0; j<cara.length;j++){
+				indices.push(cara[j]);
+				
+				if(j+1 >= cara.length)
+					indices.push(cara[0]);
+				else
+					indices.push(cara[j+1]);
+
+				if(j+2 >= cara.length)
+					indices.push(cara[1]);
+				else
+					indices.push(cara[j+2]);
+			}
+		}
+		return indices;
+	},
 	parseLine: function(i) {
 		var list = this.data[i].replace("\r", "");
 		list = list.split(" ");
