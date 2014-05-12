@@ -11,21 +11,15 @@ $( document ).ready(function() {
 
 	var pyramid = new TORNADO.Mesh();
 	
-	pyramid.addVertex( 0.0,  1.0,  0.0, "cyan");
-	pyramid.addVertex(-1.0, -1.0,  1.0, "green");
-	pyramid.addVertex( 1.0, -1.0,  1.0, "blue");
+	pyramid.addVertex(0, 0, 0,"cyan"); 
+	pyramid.addVertex(1, 0, 0, "blue");
+	pyramid.addVertex(1, 1, 0, "cyan");
+	pyramid.addVertex(0, 1, 0, "green");
+	pyramid.addVertex(0.5, 0.5, 1, "green");
 
-	pyramid.addVertex( 0.0,  1.0,  0.0, "green");
-	pyramid.addVertex( 1.0, -1.0,  1.0, "cyan");
-	pyramid.addVertex( 1.0, -1.0, -1.0, "blue");
-	
-	pyramid.addVertex( 0.0,  1.0,  0.0, "blue");
-	pyramid.addVertex( 1.0, -1.0, -1.0, "blue");
-	pyramid.addVertex(-1.0, -1.0, -1.0, "blue");
-	
-	pyramid.addVertex( 0.0,  1.0,  0.0, "yellow");
-	pyramid.addVertex(-1.0, -1.0, -1.0, "yellow");
-	pyramid.addVertex(-1.0, -1.0,  1.0, "yellow");
+	var indices = [0, 1, 3, 3, 1, 2, 2, 3, 4, 4, 0, 3, 0, 1, 4, 1, 4, 2];
+	 
+	pyramid.addListIndex(indices);
 	
 	pyramid.prepare();
 
