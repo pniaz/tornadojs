@@ -1,5 +1,6 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 function extend(base, sub) {sub.prototype = Object.create(base.prototype); sub.prototype.constructor = sub; Object.defineProperty(sub.prototype, 'constructor', {enumerable: false, value: sub }); }
+function degToRad(degrees) {return degrees * Math.PI / 180; }
 
 var gl;
 var shaderProgram;

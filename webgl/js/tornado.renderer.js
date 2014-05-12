@@ -46,10 +46,6 @@ TORNADO.Renderer.prototype = {
     	this.mvMatrix = this.mvMatrixStack.pop();
 	},
 
-	degToRad: function(degrees) {
-    	return degrees * Math.PI / 180;
-	},
-
 	setMatrixUniforms: function() {
     	gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, this.pMatrix);
     	gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, this.mvMatrix);
@@ -59,16 +55,12 @@ TORNADO.Renderer.prototype = {
 
 	    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 	    //gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-	    
-	    mat4.perspective(49, gl.viewportWidth / gl.viewportHeight, 0.4, 100.0, this.pMatrix);
-	    
-	    mat4.identity(this.mvMatrix);
-	    
-	    mat4.translate(this.mvMatrix, [-1.5, 0.0, -7.0]);
 
+
+        camera.setPerspective(this.pMatrix, this.mvMatrix);
 	    this.mvPushMatrix();
-	    //mat4.rotate(this.mvMatrix, this.degToRad(rPyramid), [0.5, 1, 0]);
-        //console.log("draw")
+	    //mat4.rotate(this.mvMatrix, degToRad(rPyramid), [0.5, 1, 0]);
+        
         scene.draw();
 
         this.setMatrixUniforms();
