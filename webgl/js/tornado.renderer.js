@@ -1,10 +1,6 @@
 /*
 	Rederer class
 */
-var charged = false;
-
-var sceneActual;
-var cameraActual;
 
 TORNADO.Renderer = function () {
 	
@@ -71,8 +67,8 @@ TORNADO.Renderer.prototype = {
 	    mat4.translate(this.mvMatrix, [-1.5, 0.0, -7.0]);
 
 	    this.mvPushMatrix();
-	    mat4.rotate(this.mvMatrix, this.degToRad(rPyramid), [0.5, 1, 0]);
-
+	    //mat4.rotate(this.mvMatrix, this.degToRad(rPyramid), [0.5, 1, 0]);
+        //console.log("draw")
         scene.draw();
 
         this.setMatrixUniforms();
@@ -80,38 +76,11 @@ TORNADO.Renderer.prototype = {
 	   	this.mvPopMatrix();
 	},
 
-    startRender: function(scene,camera)
+    startRender: function(scene,camera,loop)
     {
-        sceneActual = scene;
-        cameraActual = camera;
-
-        this.shadersLoader.loadShaders(function() {
-            charged = true;
+        this.shadersLoader.loadShaders(function mainLoop(){
+            requestAnimFrame(mainLoop);
+            loop();
         });
-        loop();
     }
-}
-
-function loop(){
-
-    requestAnimFrame(loop);
-
-    if(charged)
-    {
-        renderer.render(sceneActual,cameraActual);
-        animate();
-    }
-};
-
-var lastTime = 0;
-var rPyramid = 0;
-
-function animate() {
-    var timeNow = new Date().getTime();
-
-    if (lastTime != 0) {
-      var elapsed = timeNow - lastTime;
-      rPyramid += (90 * elapsed) / 1000.0;
-    }
-    lastTime = timeNow;
 }
