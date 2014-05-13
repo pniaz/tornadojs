@@ -2,31 +2,13 @@ var renderer;
 var scene;
 var camera;
 
-
 $(document ).ready(function() {
 	
 	var canvas = document.getElementById("main");
 	
 	scene = new TORNADO.Scene(canvas);
-
-	/*
-	var pyramid = new TORNADO.Mesh();
-	
-	pyramid.addVertex(0, 0, 0,"cyan"); 
-	pyramid.addVertex(1, 0, 0, "blue");
-	pyramid.addVertex(1, 1, 0, "cyan");
-	pyramid.addVertex(0, 1, 0, "green");
-	pyramid.addVertex(0.5, 0.5, 1, "green");
-
-	var indices = [0, 1, 3, 3, 1, 2, 2, 3, 4, 4, 0, 3, 0, 1, 4, 1, 4, 2];
-
-	pyramid.addListIndex(indices);
-	
-	pyramid.prepare();
-
-	scene.addChild(new TORNADO.Node(pyramid));
-	*/
-	//console.debug(scene);
+	renderer = new TORNADO.Renderer();
+	camera = new TORNADO.Camera();
 
 	var OBJloader = new TORNADO.OBJLoader();
 
@@ -34,13 +16,11 @@ $(document ).ready(function() {
 		scene.addChild(new TORNADO.Node(mesh));
 	});
 
-	renderer = new TORNADO.Renderer();
-	camera = new TORNADO.Camera();
-	
 	var lastTime = 0;
-	var rPyramid = 0;
+	var rPyramid = 0.1;
 
 	renderer.startRender(scene,camera, function(){
+       
         renderer.render(scene,camera);
         
         var timeNow = new Date().getTime();
