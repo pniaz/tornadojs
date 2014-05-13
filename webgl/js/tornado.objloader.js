@@ -12,11 +12,24 @@ TORNADO.OBJLoader.prototype = {
 		xhr = new XMLHttpRequest;
 		xhr.open("GET", url);
 		xhr.responseType = "text";
-		xhr.onload = __bind(function() {
-		  var data = (xhr.responseText);
-		  return callback(new TORNADO.OBJ(data));
-		}, this); 
+		xhr.onload = __bind(
+			function() {
+				var data = (xhr.responseText);
+				var obj = new TORNADO.OBJ(data);
+				var numTriangles = obj.decode();
+
+				var vertex = obj.getListVertexArray();
+				var faces = obj.getListFaceArray();
+				var indices = obj.getListIndexArray(faces);
+					
+				var mesh = new TORNADO.Mesh();
+				mesh.addListVertex(vertex);
+				mesh.addListIndex(indices);
+				mesh.prepare();
+				return callback(mesh);
+			}, 
+			this
+		); 
 		xhr.send(null);
-		return this.obj;
 	}
 }

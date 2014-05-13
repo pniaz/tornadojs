@@ -45,6 +45,7 @@ TORNADO.Mesh.prototype.addListVertex = function(listVertex){
 	{
 		var color = "gray";
 		
+		/*
 		if(i%6==0)
 			color = "green";
 		
@@ -53,7 +54,7 @@ TORNADO.Mesh.prototype.addListVertex = function(listVertex){
 		
 		if(i%12==0)
 			color = "yellow";
-
+		*/
 		this.addVertex(listVertex[i],listVertex[i+1],listVertex[i+2],color);
 	}		
 }

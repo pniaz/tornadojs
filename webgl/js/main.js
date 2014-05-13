@@ -28,44 +28,30 @@ $(document ).ready(function() {
 	*/
 	//console.debug(scene);
 
-	var loader = new TORNADO.OBJLoader();
+	var OBJloader = new TORNADO.OBJLoader();
 
-	loader.load("./mono.obj", function(obj){
-	  	
-	  	var numTriangles = obj.decode();
-
-		var vertexCube = obj.getListVertexArray();
-		var facesCube = obj.getListFaceArray();
-		var indices = obj.getListIndexArray(facesCube);
-		console.log(facesCube);
-			
-		var cubo = new TORNADO.Mesh();
-		cubo.addListVertex(vertexCube);
-		cubo.addListIndex(indices);
-
-		cubo.prepare();
-		scene.addChild(new TORNADO.Node(cubo));
-		
+	OBJloader.load("./mono.obj", function(mesh){
+		scene.addChild(new TORNADO.Node(mesh));
 	});
 
-
+	renderer = new TORNADO.Renderer();
+	camera = new TORNADO.Camera();
+	
 	var lastTime = 0;
 	var rPyramid = 0;
-	renderer = new TORNADO.Renderer();
 
 	renderer.startRender(scene,camera, function(){
         renderer.render(scene,camera);
-        /*
+        
         var timeNow = new Date().getTime();
 
 	    if (lastTime != 0) {
 	      var elapsed = timeNow - lastTime;
 	      rPyramid += (90 * elapsed) / 1000.0;
+
+	      //camera.setRotationX(rPyramid);
 	    }
 	    lastTime = timeNow;
-		*/
+		
 	});
 });
-
-
-
