@@ -35,16 +35,22 @@ TORNADO.ShadersLoader.prototype = {
 		gl.useProgram(shaderProgram);
 		
 		shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
-		gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
-		
-		//lesson 2
+		shaderProgram.vertexNormalAttribute = gl.getAttribLocation(shaderProgram, "aVertexNormal");
 		shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
+
+		gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+		gl.enableVertexAttribArray(shaderProgram.vertexNormalAttribute);
     	gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
-		//lesson 2
 
 		shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 		shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+		shaderProgram.uNMatrixUniform = gl.getUniformLocation(shaderProgram, "uNMatrix");
 
+		shaderProgram.uLightDirectionUniform = gl.getUniformLocation(shaderProgram, "uLightDirection");
+	   	shaderProgram.uLightAmbientUniform = gl.getUniformLocation(shaderProgram, "uLightAmbient");
+	   	shaderProgram.uLightDiffuseUniform = gl.getUniformLocation(shaderProgram, "uLightDiffuse");
+	   	shaderProgram.uMaterialDiffuseUniform = gl.getUniformLocation(shaderProgram,"uMaterialDiffuse");
+		
 		return callbackShadersLoaded();
 
 	},
