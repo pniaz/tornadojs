@@ -2,11 +2,12 @@
 	Transform class
 */
 TORNADO.Transform = function () {
-	Entity.call(this);
+	TORNADO.Entity.call(this);
 };
-extend(Entity, Transform);
+extend(TORNADO.Entity, TORNADO.Transform);
 
 TORNADO.Transform.prototype.matrix = mat4.create();
+
 TORNADO.Transform.prototype.charge = function(mat){
 	this.matrix = mat4.create(mat);
 }
@@ -51,7 +52,10 @@ TORNADO.Transform.prototype.rotate = function(degrees, x, y, z){
 	axis[2] = z;
 	this.matrix = mat4.rotate(this.matrix, degrees, axis);
 }
-TORNADO.Transform.prototype.beginDraw = function(){
+TORNADO.Transform.prototype.beginDraw = function(renderer){
+	var mv = renderer.mvPushMatrix();
+    mat4.multiply(mv,this.matrix);
 }
-TORNADO.Transform.prototype.endDraw = function(){
+TORNADO.Transform.prototype.endDraw = function(renderer){
+	renderer.mvPopMatrix();
 }

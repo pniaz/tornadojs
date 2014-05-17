@@ -56,14 +56,14 @@ TORNADO.Node.prototype = {
 	getDad: function (){
 		return this.dad;
 	},
-	draw: function(){
+	draw: function(renderer){
 		if(this.entity)
-			this.entity.beginDraw();
+			this.entity.beginDraw(renderer);
 		for (i in this.children) {
-			this.children[i].draw();
+			this.children[i].draw(renderer);
 		}
 		if(this.entity)
-			this.entity.endDraw();
+			this.entity.endDraw(renderer);
 	},
 	sayHello: function(){
 		console.log("Hello");

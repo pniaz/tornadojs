@@ -6,11 +6,6 @@ TORNADO.Renderer = function () {
 	
 	this.mvMatrix = mat4.create(),
 	this.pMatrix = mat4.create(),
-
-	//globales
-	gmvMatrix = this.mvMatrix;
-	gpMatrix = this.pMatrix;
-
 	this.mvMatrixStack = [],
 
 	gl.clearColor(0.0, 0.0, 0.0, 1.0),          // Set clear color to black, fully opaque
@@ -39,6 +34,7 @@ TORNADO.Renderer.prototype = {
     	var copy = mat4.create();
    	 	mat4.set(this.mvMatrix, copy);
     	this.mvMatrixStack.push(copy);
+        return this.mvMatrix;
 	},
 
 	mvPopMatrix: function() {
@@ -56,20 +52,15 @@ TORNADO.Renderer.prototype = {
 	render: function (scene, camera) {
 
 	    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-	    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
         camera.setPerspective(this.pMatrix, this.mvMatrix);
-	    this.mvPushMatrix();
-	    mat4.rotate(this.mvMatrix, degToRad(45), [0.5, 1, 0]);
-        
-        scene.draw();
-
-        //this.setMatrixUniforms();
-        
+	    
+        this.mvPushMatrix();        
+        scene.draw(this);
+        this.setMatrixUniforms();      
 	   	this.mvPopMatrix();
 	},
 
-    startRender: function(scene,camera,loop)
+    startLoop: function(loop)
     {
         this.shadersLoader.loadShaders(function mainLoop(){
             requestAnimFrame(mainLoop);

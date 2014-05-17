@@ -78,6 +78,10 @@ TORNADO.OBJ.prototype = {
 	},
 	parseLine: function(i) {
 		var list = this.data[i].replace("\r", "");
+		while(list.search("  ")!=-1)
+			list = list.replace("  "," ");
+		var list = this.data[i].replace(" \n", "\n");
+
 		list = list.split(" ");
 		var type = list[0];
 
