@@ -8,8 +8,8 @@ TORNADO.Camera = function () {
 TORNADO.Camera.prototype = {
 	constructor: TORNADO.Camera,
 
-	x:0, y:0, z:-7.0,
-	fov: 45, nearest: 0.8, farest: 100.0,
+	x:10, y:10, z:-7.0,
+	fov: 150, nearest: 0.8, farest: 100.0,
 	rotationX: 0,
 
 	setPerspective: function(pMatrix, mvMatrix){

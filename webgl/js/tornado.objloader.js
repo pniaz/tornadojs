@@ -21,11 +21,15 @@ TORNADO.OBJLoader.prototype = {
 				var vertex = obj.getListVertexArray();
 				var faces = obj.getListFaceArray();
 				var indices = obj.getListIndexArray(faces);
+				var textureCoord = obj.getListTextureCoordArray();
 					
 				var mesh = new TORNADO.Mesh();
 				mesh.addListVertex(vertex);
 				mesh.addListIndex(indices);
+				mesh.addListTextureCoord(textureCoord);
+
 				mesh.prepare();
+
 				return callback(mesh);
 			}, 
 			this

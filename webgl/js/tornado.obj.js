@@ -38,6 +38,16 @@ TORNADO.OBJ.prototype = {
 
 		return listVertexArray;
 	},
+	getListTextureCoordArray: function (){
+		var listTextureCoordArray = new Array();
+
+		for (i in this.list_vt){
+
+			listTextureCoordArray.push(this.list_vt[i][0]);
+			listTextureCoordArray.push(this.list_vt[i][1]);
+		}
+		return listTextureCoordArray;
+	},
 	getListFaceArray: function (){
 
 		var listFaceArray = new Array();
@@ -60,6 +70,10 @@ TORNADO.OBJ.prototype = {
 
 			var cara = faceCube[i];
 
+			//indices.push(cara[0]);
+			//indices.push(cara[1]);
+			//indices.push(cara[2]);
+			
 			for(var j=0; j<cara.length;j++){
 				indices.push(cara[j]);
 				
@@ -78,9 +92,11 @@ TORNADO.OBJ.prototype = {
 	},
 	parseLine: function(i) {
 		var list = this.data[i].replace("\r", "");
-		while(list.search("  ")!=-1)
+
+		while(list.search("  ") != -1)
 			list = list.replace("  "," ");
-		var list = this.data[i].replace(" \n", "\n");
+
+		list = list.replace(" \n", "\n");
 
 		list = list.split(" ");
 		var type = list[0];
