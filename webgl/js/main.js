@@ -26,10 +26,23 @@ $(document ).ready(function() {
 	    if (lastTime != 0) {
 	     	var elapsed = timeNow - lastTime;
 	     	trans += elapsed;
-	     	monoT.translate(trans,0,0);
+	     	
+	     	//console.log(trans);
         	renderer.render(scene,camera);
 	    }
 	    lastTime = timeNow;
-		
+
+		if(keys[37]) camera.move(-0.1,0,0);	//izquierda
+		if(keys[38]) camera.move(0,0.1,0);	//arriba
+	    if(keys[39]) camera.move(0.1,0,0);	//derecha
+	    if(keys[40]) camera.move(0,-0.1,0);	//abajo
 	});
+
+	var keys = [];
+	onkeydown = onkeyup = function(event){
+	    keys[event.keyCode] = event.type == 'keydown';
+	}
+	document.addEventListener('keydown', onkeydown);
+	document.addEventListener('keyup', onkeyup);
+
 });
