@@ -59,7 +59,6 @@ TORNADO.Renderer.prototype = {
 
         camera.setPerspective(this.pMatrix, this.mvMatrix);
 	    this.mvPushMatrix();
-	    
 	    //mat4.rotate(this.mvMatrix, degToRad(rPyramid), [0.5, 1, 0]);
         
         scene.draw();

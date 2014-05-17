@@ -76,7 +76,6 @@ TORNADO.Mesh.prototype.getColorBuffer = function(){
 }
 TORNADO.Mesh.prototype.prepare = function(){
 
-	//Vertex
 	this.vertexBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.getVertexBuffer()), gl.STATIC_DRAW);
@@ -84,13 +83,11 @@ TORNADO.Mesh.prototype.prepare = function(){
     this.vertexBuffer.itemSize = 3;
     this.vertexBuffer.numItems = this.indexArray.length;
 
-    //index
     this.indexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexArray),gl.STATIC_DRAW);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
-    //color
     this.colorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.getColorBuffer()), gl.STATIC_DRAW);
@@ -99,14 +96,11 @@ TORNADO.Mesh.prototype.prepare = function(){
 }
 TORNADO.Mesh.prototype.beginDraw = function(){
     
-    //vertex
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
-    //index
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
-	//color
    	gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
   	gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
