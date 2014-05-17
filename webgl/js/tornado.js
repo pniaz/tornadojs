@@ -25,6 +25,7 @@ TORNADO.Loader.prototype  = {
 		"js/tornado.shadersLoader.js",
 		"js/tornado.entity.js",
 		"js/tornado.mesh.js",
+		"js/tornado.transform.js",
 		"js/tornado.node.js",
 		"js/tornado.resource.js",
 		"js/tornado.resourcesManager.js",
