@@ -6,6 +6,11 @@ TORNADO.Renderer = function () {
 	
 	this.mvMatrix = mat4.create(),
 	this.pMatrix = mat4.create(),
+
+	//globales
+	gmvMatrix = this.mvMatrix;
+	gpMatrix = this.pMatrix;
+
 	this.mvMatrixStack = [],
 
 	gl.clearColor(0.0, 0.0, 0.0, 1.0),          // Set clear color to black, fully opaque
@@ -19,7 +24,6 @@ TORNADO.Renderer = function () {
     return this;
 };
 
-
 TORNADO.Renderer.prototype = {
 
 	constructor: TORNADO.Renderer,
@@ -30,8 +34,6 @@ TORNADO.Renderer.prototype = {
 	mvMatrixStack:null,
     shaderProgram:null,
     shadersLoader:null,
-	//pyramidVertexPositionBuffer:null,
-	//pyramidVertexColorBuffer:null,
 
 	mvPushMatrix: function() {
     	var copy = mat4.create();
@@ -54,16 +56,15 @@ TORNADO.Renderer.prototype = {
 	render: function (scene, camera) {
 
 	    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-	    //gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
+	    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         camera.setPerspective(this.pMatrix, this.mvMatrix);
 	    this.mvPushMatrix();
-	    //mat4.rotate(this.mvMatrix, degToRad(rPyramid), [0.5, 1, 0]);
+	    mat4.rotate(this.mvMatrix, degToRad(45), [0.5, 1, 0]);
         
         scene.draw();
 
-        this.setMatrixUniforms();
+        //this.setMatrixUniforms();
         
 	   	this.mvPopMatrix();
 	},

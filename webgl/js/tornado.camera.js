@@ -16,7 +16,7 @@ TORNADO.Camera.prototype = {
 		mat4.perspective(this.fov, gl.viewportWidth / gl.viewportHeight, this.nearest, this.farest, pMatrix);
 		mat4.identity(mvMatrix);
 	    mat4.translate(mvMatrix, [this.x, this.y, this.z]);
-	    console.log(degToRad(this.rotationX));
+	    //console.log(degToRad(this.rotationX));
 		//mat4.rotate(this.mvMatrix, degToRad(this.rotationX), [1, 0, 0]);
 	},
 	setPosition: function(x,y,z){
