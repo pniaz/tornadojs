@@ -22,12 +22,13 @@ TORNADO.OBJLoader.prototype = {
 				var faces = obj.getListFaceArray();
 				var indices = obj.getListIndexArray(faces);
 				var textureCoord = obj.getListTextureCoordArray();
+				var normals = obj.getListNormals();
 					
 				var mesh = new TORNADO.Mesh();
 				mesh.addListVertex(vertex);
 				mesh.addListIndex(indices);
 				mesh.addListTextureCoord(textureCoord);
-				mesh.addListNormal(calculateNormals(vertex,indices));
+				mesh.addListNormal(normals);
 
 				mesh.prepare();
 

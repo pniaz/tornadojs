@@ -13,18 +13,18 @@ $(document ).ready(function() {
 	scene.addChild(monoTNode);
 	*/
 
-	/*
+	
 	var OBJloader = new TORNADO.OBJLoader();
 	OBJloader.load("./cubo.obj", function(mesh){
 		scene.addChild(new TORNADO.Node(mesh));
 	});
-	*/	
-
-	var JSONloader = new TORNADO.JSONLoader();
 	
+	/*
+	var JSONloader = new TORNADO.JSONLoader();	
 	JSONloader.load("./Teapot.json", function(mesh){
 		scene.addChild(new TORNADO.Node(mesh));
 	});
+	*/
 	
 	var lastTime = 0;
 	var trans = 0.1;

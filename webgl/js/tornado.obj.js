@@ -38,11 +38,22 @@ TORNADO.OBJ.prototype = {
 
 		return listVertexArray;
 	},
+	getListNormals: function(){
+		var listNormals = new Array();
+
+		for (i in this.list_vn)
+		{
+			listNormals.push(this.list_vn[i][0]);
+			listNormals.push(this.list_vn[i][1]);
+			listNormals.push(this.list_vn[i][2]);
+		}
+
+		return listNormals;
+	},
 	getListTextureCoordArray: function (){
 		var listTextureCoordArray = new Array();
 
 		for (i in this.list_vt){
-
 			listTextureCoordArray.push(this.list_vt[i][0]);
 			listTextureCoordArray.push(this.list_vt[i][1]);
 		}
@@ -70,10 +81,11 @@ TORNADO.OBJ.prototype = {
 
 			var cara = faceCube[i];
 
-			//indices.push(cara[0]);
-			//indices.push(cara[1]);
-			//indices.push(cara[2]);
+			indices.push(cara[0]);
+			indices.push(cara[1]);
+			indices.push(cara[2]);
 			
+			/*
 			for(var j=0; j<cara.length;j++){
 				indices.push(cara[j]);
 				
@@ -87,6 +99,7 @@ TORNADO.OBJ.prototype = {
 				else
 					indices.push(cara[j+2]);
 			}
+			*/
 		}
 		return indices;
 	},

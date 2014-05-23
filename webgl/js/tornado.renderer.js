@@ -66,6 +66,7 @@ TORNADO.Renderer.prototype = {
         gl.uniform3f(shaderProgram.pointLightingDiffuseColorUniform, 0.8, 0.8, 0.8 );
 
         gl.uniform1f(shaderProgram.materialShininessUniform, 72);
+    
         gl.uniform1i(shaderProgram.useTexturesUniform, true);
     },
 

@@ -78,7 +78,9 @@ TORNADO.Mesh.prototype.prepare = function(){
 	this.initBuffers();
 	this.initTextures();
 
+
     console.debug(this);
+    console.debug(this.getVertexBuffer());
 }
 TORNADO.Mesh.prototype.initBuffers = function(){
 
@@ -89,6 +91,7 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
     this.vertexBuffer.itemSize = 3;
     this.vertexBuffer.numItems = this.vertexArray.length;
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
     //Normals
     this.normalsBuffer = gl.createBuffer();
@@ -103,7 +106,8 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.textureCoordArray), gl.STATIC_DRAW);
     this.textureCoordBuffer.itemSize = 2;
-    this.textureCoordBuffer.numItems = this.textureCoordArray.length/2;
+    this.textureCoordBuffer.numItems = (this.textureCoordArray.length/2);
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
     //Index 
     this.indexBuffer = gl.createBuffer();
