@@ -7,6 +7,7 @@ $(document ).ready(function() {
 	var renderer = new TORNADO.Renderer();
 	var camera = new TORNADO.Camera();
 	
+
 	/*
 	var monoT = new TORNADO.Transform();
 	var monoTNode = new TORNADO.Node(monoT)
@@ -25,9 +26,16 @@ $(document ).ready(function() {
 	JSONloader.load("./Teapot.json", function(mesh){
 		scene.addChild(new TORNADO.Node(mesh));
 	});
-	
-	
-	
+
+	var light1 = new TORNADO.Light(
+		40,  			//bright, 
+		"white",  //aColor, 
+		"green",  //dColor, 
+		"green",  //sColor, 
+		new TORNADO.Vertex(-10, 4, -20) //vertexPosition
+	);
+	scene.addChild(new TORNADO.Node(light1));
+
 	var lastTime = 0;
 	var trans = 0.1;
 

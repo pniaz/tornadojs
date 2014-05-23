@@ -54,26 +54,12 @@ TORNADO.Renderer.prototype = {
         gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
 
 	},
-    initLights: function() {
-        gl.uniform1i(shaderProgram.showSpecularHighlightsUniform, true)
-        gl.uniform1i(shaderProgram.useLightingUniform, true);
-
-        gl.uniform3f(shaderProgram.ambientColorUniform, 0.3, 0.3, 0.3);
-
-        gl.uniform3f(shaderProgram.pointLightingLocationUniform, -10, 4, -20);
-        gl.uniform3f(shaderProgram.pointLightingSpecularColorUniform, 0.8, 0.8, 0.8 );
-        gl.uniform3f(shaderProgram.pointLightingDiffuseColorUniform, 0.8, 0.8, 0.8 );
-
-        gl.uniform1f(shaderProgram.materialShininessUniform, 40);
-
-        gl.uniform1i(shaderProgram.useTexturesUniform, true);
-    },
 
 	render: function (scene, camera) {
 
 	    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         camera.setPerspective(this.pMatrix, this.mvMatrix);
-	    this.initLights();
+	    //this.initLights();
         this.mvPushMatrix();        
         scene.draw(this);
         this.setMatrixUniforms();      

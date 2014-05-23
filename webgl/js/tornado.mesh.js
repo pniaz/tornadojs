@@ -85,10 +85,10 @@ TORNADO.Mesh.prototype.getColorBuffer = function(){
 TORNADO.Mesh.prototype.prepare = function(){
 	this.initBuffers();
 	this.initTextures();
-
-
+/*
     console.debug(this);
     console.debug(this.getVertexBuffer());
+*/
 }
 TORNADO.Mesh.prototype.initBuffers = function(){
 
@@ -121,6 +121,8 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     this.indexBuffer.numItems = this.indexArray.length;
 }
 TORNADO.Mesh.prototype.initTextures = function(){
+
+
 	var self = this;
     this.texture = gl.createTexture();
     this.texture.image = new Image();
@@ -142,8 +144,7 @@ TORNADO.Mesh.prototype.handleLoadedTexture = function(texture) {
     gl.bindTexture(gl.TEXTURE_2D, null);
 }
 TORNADO.Mesh.prototype.beginDraw = function(renderer){
-  
-  
+    
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
@@ -157,6 +158,7 @@ TORNADO.Mesh.prototype.beginDraw = function(renderer){
 
     renderer.setMatrixUniforms();
 
+    gl.uniform1i(shaderProgram.useTexturesUniform, true);
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
     gl.uniform1i(shaderProgram.samplerUniform, 0);
