@@ -17,10 +17,7 @@ TORNADO.JSONLoader.prototype = {
 			function() {
 				var data = (xhr.responseText);
 				JSONData = JSON.parse(data);
-
-				console.log("Normales del JSON");
-				console.debug(JSONData.vertexNormals);
-				
+						
 				var mesh = new TORNADO.Mesh();
 				mesh.addListVertex(JSONData.vertexPositions);
 				mesh.addListIndex(JSONData.indices);

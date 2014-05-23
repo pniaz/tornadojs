@@ -44,76 +44,18 @@ TORNADO.Mesh.prototype.addListVertex = function(listVertex){
     this.addVertex(listVertex[i],listVertex[i+1],listVertex[i+2],color);
   }   
 }
+
 TORNADO.Mesh.prototype.addListIndex = function(indexList){
 	for(var i=0; i < indexList.length;i++){
 		this.indexArray.push(indexList[i]);
 	}
 }
+
 TORNADO.Mesh.prototype.addListTextureCoord = function(textureCoordList){
     this.textureCoordArray = textureCoordList;  
 }
 TORNADO.Mesh.prototype.addListNormal = function(normalsList){
     this.normalsArray = normalsList;  
-}
-TORNADO.Mesh.prototype.calculateNormals = function(vs, ind){
-
-	var x=0; 
-    var y=1;
-    var z=2;
-    var ns = [];
-    
-    for(var i=0;i<vs.length;i=i+3){ //for each vertex, initialize normal x, normal y, normal z
-        ns[i+x]=0.0;
-        ns[i+y]=0.0;
-        ns[i+z]=0.0;
-    }
-    
-    for(var i=0;i<ind.length;i=i+3){ //we work on triads of vertices to calculate normals so i = i+3 (i = indices index)
-        var v1 = [];
-        var v2 = [];
-        var normal = [];
-
-        //p2 - p1
-        v1[x] = vs[3*ind[i+2]+x] - vs[3*ind[i+1]+x];
-        v1[y] = vs[3*ind[i+2]+y] - vs[3*ind[i+1]+y];
-        v1[z] = vs[3*ind[i+2]+z] - vs[3*ind[i+1]+z];
-
-        //p0 - p1
-        v2[x] = vs[3*ind[i]+x] - vs[3*ind[i+1]+x];
-        v2[y] = vs[3*ind[i]+y] - vs[3*ind[i+1]+y];
-        v2[z] = vs[3*ind[i]+z] - vs[3*ind[i+1]+z];
-
-        //cross product by Sarrus Rule
-        normal[x] = v1[y]*v2[z] - v1[z]*v2[y];
-        normal[y] = v1[z]*v2[x] - v1[x]*v2[z];
-        normal[z] = v1[x]*v2[y] - v1[y]*v2[x];
-
-        for(j=0;j<3;j++){ //update the normals of that triangle: sum of vectors
-            ns[3*ind[i+j]+x] =  ns[3*ind[i+j]+x] + normal[x];
-            ns[3*ind[i+j]+y] =  ns[3*ind[i+j]+y] + normal[y];
-            ns[3*ind[i+j]+z] =  ns[3*ind[i+j]+z] + normal[z]; }
-    }
-    //normalize the result
-    for(var i=0;i<vs.length;i=i+3){ //the increment here is because each vertex occurs with an offset of 3 in the array (due to x, y, z contiguous values)
-    
-        var nn=[];
-        nn[x] = ns[i+x];
-        nn[y] = ns[i+y];
-        nn[z] = ns[i+z];
-        
-        var len = Math.sqrt((nn[x]*nn[x])+(nn[y]*nn[y])+(nn[z]*nn[z]));
-        if (len == 0) len = 1.0;
-        
-        nn[x] = nn[x]/len;
-        nn[y] = nn[y]/len;
-        nn[z] = nn[z]/len;
-        
-        ns[i+x] = nn[x];
-        ns[i+y] = nn[y];
-        ns[i+z] = nn[z];
-    }
-    
-    return ns;
 }
 
 TORNADO.Mesh.prototype.getVertexBuffer = function(){
@@ -135,9 +77,8 @@ TORNADO.Mesh.prototype.getColorBuffer = function(){
 TORNADO.Mesh.prototype.prepare = function(){
 	this.initBuffers();
 	this.initTextures();
-    //this.initLights();
-    //console.debug(this);
 
+    console.debug(this);
 }
 TORNADO.Mesh.prototype.initBuffers = function(){
 
@@ -150,32 +91,19 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     this.vertexBuffer.numItems = this.vertexArray.length;
 
     //Normals
-
     this.normalsBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalsBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.normalsArray),gl.STATIC_DRAW);
     this.normalsBuffer.itemSize = 3;
-    this.normalsBuffer.numItems = this.normalsArray.length;
+    this.normalsBuffer.numItems = this.normalsArray.length/3;
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
-    
-  
-    //Color
-    /*
-    this.colorBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.getColorBuffer()), gl.STATIC_DRAW);
-    this.colorBuffer.itemSize = 4;
-    this.colorBuffer.numItems = this.getColorBuffer().length/4;
-    */
       	
     //Texture
     this.textureCoordBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
-    
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.textureCoordArray), gl.STATIC_DRAW);
     this.textureCoordBuffer.itemSize = 2;
     this.textureCoordBuffer.numItems = this.textureCoordArray.length/2;
-    
 
     //Index 
     this.indexBuffer = gl.createBuffer();
@@ -196,13 +124,7 @@ TORNADO.Mesh.prototype.initTextures = function(){
 }
 
 TORNADO.Mesh.prototype.handleLoadedTexture = function(texture) {
-    /*gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-    gl.bindTexture(gl.TEXTURE_2D, null);*/
-
+  
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
@@ -217,10 +139,6 @@ TORNADO.Mesh.prototype.beginDraw = function(renderer){
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-    /*
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-    gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    */
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalsBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.normalsBuffer.itemSize, gl.FLOAT, false, 0, 0);
     

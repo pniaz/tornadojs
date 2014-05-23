@@ -4,7 +4,7 @@
 TORNADO.OBJLoader = function() {}
   
 TORNADO.OBJLoader.prototype = {
-	
+
 	constructor: TORNADO.OBJLoader,
 	
 	load: function(url, callback) {
@@ -27,6 +27,7 @@ TORNADO.OBJLoader.prototype = {
 				mesh.addListVertex(vertex);
 				mesh.addListIndex(indices);
 				mesh.addListTextureCoord(textureCoord);
+				mesh.addListNormal(calculateNormals(vertex,indices));
 
 				mesh.prepare();
 
