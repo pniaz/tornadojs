@@ -3,11 +3,22 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 	<div class="wrapper">
 	  <div class="container">
 	    <div class="canvas-container">
+	    	<div id="controllers">
+	    			<img height="70px" src="leap.png"/>
+	    			<div id="options">
+		    		   <span>Texture <input type="checkbox" id="textureCheck" value="With texture" checked="checked">
+		    		   </span>
+		    		   <span>Lights <input type="checkbox" id="lightsCheck" value="With lights" checked="checked">
+		    		   </span>
+	    		   </div>
+	    	</div>
 	      <canvas id="main" width="1024" height="640">
 	      	Your browser doesn't appear to support the HTML5 <code>canvas</code> element.
 	      </canvas>
