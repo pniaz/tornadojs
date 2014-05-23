@@ -36,10 +36,16 @@ $(document ).ready(function() {
 	    }
 	    lastTime = timeNow;
 
-		if(keys[37]) camera.move(-0.1,0,0);	//izquierda
-		if(keys[38]) camera.move(0,0.1,0);	//arriba
-	    if(keys[39]) camera.move(0.1,0,0);	//derecha
-	    if(keys[40]) camera.move(0,-0.1,0);	//abajo
+		if(keys[37]) camera.move(-0.2,0,0);	//izquierda
+		if(keys[38]) camera.move(0,0.2,0);	//arriba
+	    if(keys[39]) camera.move(0.2,0,0);	//derecha
+	    if(keys[40]) camera.move(0,-0.2,0);	//abajo
+
+	    if(keys[65]) camera.move(0,0,0.2);	//delante
+	    if(keys[90]) camera.move(0,0,-0.2);	//atras
+
+
+
 	});
 
 	var keys = [];

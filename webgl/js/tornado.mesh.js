@@ -134,9 +134,9 @@ TORNADO.Mesh.prototype.getColorBuffer = function(){
 }
 TORNADO.Mesh.prototype.prepare = function(){
 	this.initBuffers();
-	//this.initTextures();
-    this.initLights();
-  console.debug(this);
+	this.initTextures();
+    //this.initLights();
+    //console.debug(this);
 
 }
 TORNADO.Mesh.prototype.initBuffers = function(){
@@ -160,14 +160,14 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     
   
     //Color
-    
+    /*
     this.colorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.getColorBuffer()), gl.STATIC_DRAW);
     this.colorBuffer.itemSize = 4;
     this.colorBuffer.numItems = this.getColorBuffer().length/4;
-  
-    /*  	
+    */
+      	
     //Texture
     this.textureCoordBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
@@ -175,7 +175,7 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.textureCoordArray), gl.STATIC_DRAW);
     this.textureCoordBuffer.itemSize = 2;
     this.textureCoordBuffer.numItems = this.textureCoordArray.length/2;
-    */
+    
 
     //Index 
     this.indexBuffer = gl.createBuffer();
@@ -194,22 +194,22 @@ TORNADO.Mesh.prototype.initTextures = function(){
     }
     this.texture.image.src = "rustbin.jpg"; 
 }
-TORNADO.Mesh.prototype.initLights = function() {
-    gl.uniform1i(shaderProgram.showSpecularHighlightsUniform, 0.5);
-    gl.uniform1i(shaderProgram.useLightingUniform, 0.5);
-    gl.uniform3f(shaderProgram.ambientColorUniform, 0.5, 0.5, 0.5 );
-    gl.uniform3f(shaderProgram.pointLightingLocationUniform, 0.5, 0.5, 0.5 );
-    gl.uniform3f(shaderProgram.pointLightingSpecularColorUniform, 0.5, 0.5, 0.5 );
-    gl.uniform3f(shaderProgram.pointLightingDiffuseColorUniform, 0.5, 0.5, 0.5 );
-    gl.uniform1i(shaderProgram.useTexturesUniform, false);
-    gl.uniform1f(shaderProgram.materialShininessUniform, 0.5);
-}
+
 TORNADO.Mesh.prototype.handleLoadedTexture = function(texture) {
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    /*gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.bindTexture(gl.TEXTURE_2D, null);*/
+
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
+    gl.generateMipmap(gl.TEXTURE_2D);
+
     gl.bindTexture(gl.TEXTURE_2D, null);
 }
 TORNADO.Mesh.prototype.beginDraw = function(renderer){
@@ -217,21 +217,20 @@ TORNADO.Mesh.prototype.beginDraw = function(renderer){
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-
+    /*
     gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
-
+    */
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalsBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.normalsBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    /*
+    
     gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
     gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.textureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
     gl.uniform1i(shaderProgram.samplerUniform, 0);
-    */
-
+    
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     renderer.setMatrixUniforms();
     gl.drawElements(gl.TRIANGLES,this.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);

@@ -1,14 +1,3 @@
-/*precision mediump float;
-
-varying vec4 vColor;
-//varying vec2 vTextureCoord;
-//uniform sampler2D uSampler;
-
-void main(void) {
-	gl_FragColor = vColor;
-	//gl_FragColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
-}*/
-
 precision mediump float;
 
     varying vec2 vTextureCoord;
@@ -56,7 +45,7 @@ precision mediump float;
         if (uUseTextures) {
             fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
         } else {
-            fragmentColor = vec4(1.0, 1.0, 1.0, 1.0);
+            fragmentColor = vec4(1.0, 1.0, 0, 1.0);
         }
         gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
     }
