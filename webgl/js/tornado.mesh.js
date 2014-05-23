@@ -158,7 +158,7 @@ TORNADO.Mesh.prototype.beginDraw = function(renderer){
 
     renderer.setMatrixUniforms();
 
-    gl.uniform1i(shaderProgram.useTexturesUniform, true);
+    gl.uniform1i(shaderProgram.useTexturesUniform, document.getElementById("textureCheck").checked);
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
     gl.uniform1i(shaderProgram.samplerUniform, 0);

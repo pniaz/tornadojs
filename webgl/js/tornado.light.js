@@ -43,9 +43,9 @@ TORNADO.Light.prototype.beginDraw = function(){
 
 
 	gl.uniform1i(shaderProgram.showSpecularHighlightsUniform, true);
-  gl.uniform1i(shaderProgram.useLightingUniform, true);
+  gl.uniform1i(shaderProgram.useLightingUniform, document.getElementById("lightsCheck").checked);
 
-  var pos = this.position.getPosition()
+  var pos = this.position.getPosition();
   gl.uniform3f(shaderProgram.pointLightingLocationUniform, pos[0], pos[1], pos[2]);
   gl.uniform1f(shaderProgram.materialShininessUniform, this.brightness);
 
