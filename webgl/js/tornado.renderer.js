@@ -53,7 +53,6 @@ TORNADO.Renderer.prototype = {
         mat3.transpose(normalMatrix);
         gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
 
-
 	},
     initLights: function() {
         gl.uniform1i(shaderProgram.showSpecularHighlightsUniform, true)
@@ -61,12 +60,12 @@ TORNADO.Renderer.prototype = {
 
         gl.uniform3f(shaderProgram.ambientColorUniform, 0.3, 0.3, 0.3);
 
-        gl.uniform3f(shaderProgram.pointLightingLocationUniform, -10, 4, -20 );
+        gl.uniform3f(shaderProgram.pointLightingLocationUniform, -10, 4, -20);
         gl.uniform3f(shaderProgram.pointLightingSpecularColorUniform, 0.8, 0.8, 0.8 );
         gl.uniform3f(shaderProgram.pointLightingDiffuseColorUniform, 0.8, 0.8, 0.8 );
 
-        gl.uniform1f(shaderProgram.materialShininessUniform, 72);
-    
+        gl.uniform1f(shaderProgram.materialShininessUniform, 40);
+
         gl.uniform1i(shaderProgram.useTexturesUniform, true);
     },
 

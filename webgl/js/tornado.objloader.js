@@ -25,6 +25,7 @@ TORNADO.OBJLoader.prototype = {
 				var normals = obj.getListNormals();
 					
 				var mesh = new TORNADO.Mesh();
+
 				mesh.addListVertex(vertex);
 				mesh.addListIndex(indices);
 				mesh.addListTextureCoord(textureCoord);

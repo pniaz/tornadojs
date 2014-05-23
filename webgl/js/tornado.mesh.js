@@ -5,6 +5,7 @@
 TORNADO.Mesh = function () {
 	TORNADO.Entity.call(this);
 
+    //this.auxVertexCopy = [];
 	this.vertexArray = [];
     this.textureCoordArray = [];
 	this.faceArray = [];
@@ -17,7 +18,6 @@ TORNADO.Mesh = function () {
 	this.colorBuffer = [];
     this.textureCoordBuffer = [];
 
-	//Texture
 	this.texture;
 };
 
@@ -28,10 +28,12 @@ TORNADO.Mesh.prototype.vertexArray = null;
 TORNADO.Mesh.prototype.addVertex = function(x,y,z,color){
   if(x instanceof TORNADO.Vertex){
     this.vertexArray.push(x);
+    //this.auxVertexCopy.push(x);
   }
   else{
     var vertex = new TORNADO.Vertex(x,y,z,color);
     this.vertexArray.push(vertex);
+    //this.auxVertexCopy.push(vertex);
   }
 }
 TORNADO.Mesh.prototype.addListVertex = function(listVertex){
@@ -46,9 +48,15 @@ TORNADO.Mesh.prototype.addListVertex = function(listVertex){
 }
 
 TORNADO.Mesh.prototype.addListIndex = function(indexList){
+
+    //this.vertexArray = new Array();
+
 	for(var i=0; i < indexList.length;i++){
 		this.indexArray.push(indexList[i]);
+      //  this.vertexArray.push(this.auxVertexCopy[indexList[i]]);
 	}
+
+    //console.debug(this.vertexArray);
 }
 
 TORNADO.Mesh.prototype.addListTextureCoord = function(textureCoordList){
@@ -88,32 +96,27 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     this.vertexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.getVertexBuffer()), gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
     this.vertexBuffer.itemSize = 3;
     this.vertexBuffer.numItems = this.vertexArray.length;
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
     //Normals
     this.normalsBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalsBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.normalsArray),gl.STATIC_DRAW);
     this.normalsBuffer.itemSize = 3;
-    this.normalsBuffer.numItems = this.normalsArray.length/3;
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    this.normalsBuffer.numItems = (this.normalsArray.length);
       	
     //Texture
     this.textureCoordBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.textureCoordArray), gl.STATIC_DRAW);
     this.textureCoordBuffer.itemSize = 2;
-    this.textureCoordBuffer.numItems = (this.textureCoordArray.length/2);
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    this.textureCoordBuffer.numItems = (this.textureCoordArray.length);
 
     //Index 
     this.indexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexArray),gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
     this.indexBuffer.itemSize = 1;
     this.indexBuffer.numItems = this.indexArray.length;
 }
@@ -139,7 +142,8 @@ TORNADO.Mesh.prototype.handleLoadedTexture = function(texture) {
     gl.bindTexture(gl.TEXTURE_2D, null);
 }
 TORNADO.Mesh.prototype.beginDraw = function(renderer){
-    
+  
+  
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
@@ -148,13 +152,15 @@ TORNADO.Mesh.prototype.beginDraw = function(renderer){
     
     gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
     gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.textureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    
+     
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+
+    renderer.setMatrixUniforms();
+
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
     gl.uniform1i(shaderProgram.samplerUniform, 0);
-    
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
-    renderer.setMatrixUniforms();
+
     gl.drawElements(gl.TRIANGLES,this.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 }
 TORNADO.Mesh.prototype.endDraw = function(){
