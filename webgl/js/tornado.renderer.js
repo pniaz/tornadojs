@@ -47,6 +47,13 @@ TORNADO.Renderer.prototype = {
 	setMatrixUniforms: function() {
     	gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, this.pMatrix);
     	gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, this.mvMatrix);
+
+        var normalMatrix = mat3.create();
+        mat4.toInverseMat3(this.mvMatrix, normalMatrix);
+        mat3.transpose(normalMatrix);
+        gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
+
+        
 	},
 
 	render: function (scene, camera) {

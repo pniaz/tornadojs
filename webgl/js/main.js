@@ -6,14 +6,18 @@ $(document ).ready(function() {
 	var scene = new TORNADO.Scene(canvas);
 	var renderer = new TORNADO.Renderer();
 	var camera = new TORNADO.Camera();
-
+/*
 	var monoT = new TORNADO.Transform();
 	var monoTNode = new TORNADO.Node(monoT)
-	scene.addChild(monoTNode);
-
+	scene.addChild(monoTNode);*/
+/*
 	var OBJloader = new TORNADO.OBJLoader();
-
 	OBJloader.load("./mono.obj", function(mesh){
+		scene.addChild(new TORNADO.Node(mesh));
+	});
+*/
+	var JSONloader = new TORNADO.JSONLoader();
+	JSONloader.load("./Teapot.json", function(mesh){
 		scene.addChild(new TORNADO.Node(mesh));
 	});
 

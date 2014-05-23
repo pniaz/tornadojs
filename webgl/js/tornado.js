@@ -20,6 +20,7 @@ TORNADO.Loader.prototype  = {
 		"js/tornado.vertex.js",
 		"js/tornado.obj.js",
 		"js/tornado.objloader.js",
+		"js/tornado.jsonloader.js",
 		"js/tornado.camera.js",
 		"js/tornado.renderer.js",
 		"js/tornado.shadersLoader.js",
