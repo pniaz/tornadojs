@@ -23,8 +23,6 @@ TORNADO.Light = function (bright, aColor, dColor, sColor, vertexPosition) {
 		this.position = vertexPosition;
 	else this.position = new TORNADO.Vertex(0,0,0,"white");
 
-	console.debug(this.position);
-	return;
 	TORNADO.Entity.call(this);
 };
 

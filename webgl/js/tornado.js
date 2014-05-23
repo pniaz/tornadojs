@@ -17,6 +17,7 @@ TORNADO.Loader.prototype  = {
 		"js/webgl-utils.js",
 		"js/tornado.matrix.js",
 		"js/tornado.color.js",
+		"js/tornado.texture.js",
 		"js/tornado.vertex.js",
 		"js/tornado.obj.js",
 		"js/tornado.objloader.js",

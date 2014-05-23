@@ -19,10 +19,12 @@ TORNADO.JSONLoader.prototype = {
 				JSONData = JSON.parse(data);
 						
 				var mesh = new TORNADO.Mesh();
+				
 				mesh.addListVertex(JSONData.vertexPositions);
 				mesh.addListIndex(JSONData.indices);
-				mesh.addListTextureCoord(JSONData.vertexTextureCoords);
+				
 				mesh.addListNormal(JSONData.vertexNormals);
+				mesh.setTexture(JSONData.textureImage, JSONData.vertexTextureCoords);
 
 				mesh.prepare();
 

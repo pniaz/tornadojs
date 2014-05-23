@@ -7,7 +7,7 @@ TORNADO.Mesh = function () {
 
     //this.auxVertexCopy = [];
 	this.vertexArray = [];
-    this.textureCoordArray = [];
+
 	this.faceArray = [];
     this.indexArray = [];
 	this.normalsArray = [];
@@ -16,9 +16,8 @@ TORNADO.Mesh = function () {
 	this.indexBuffer = [];
 	this.normalsBuffer = [];
 	this.colorBuffer = [];
-    this.textureCoordBuffer = [];
 
-	this.texture;
+	this.texture = {};
 };
 
 extend(TORNADO.Entity, TORNADO.Mesh);
@@ -46,7 +45,10 @@ TORNADO.Mesh.prototype.addListVertex = function(listVertex){
     this.addVertex(listVertex[i],listVertex[i+1],listVertex[i+2],color);
   }   
 }
-
+TORNADO.Mesh.prototype.setTexture = function(url, coords){
+    this.texture = new TORNADO.Texture();
+    this.texture.init(url, coords);
+}
 TORNADO.Mesh.prototype.addListIndex = function(indexList){
 
     //this.vertexArray = new Array();
@@ -60,7 +62,7 @@ TORNADO.Mesh.prototype.addListIndex = function(indexList){
 }
 
 TORNADO.Mesh.prototype.addListTextureCoord = function(textureCoordList){
-    this.textureCoordArray = textureCoordList;  
+    this.texture.setCoords(textureCoordList);  
 }
 TORNADO.Mesh.prototype.addListNormal = function(normalsList){
     this.normalsArray = normalsList;  
@@ -84,7 +86,7 @@ TORNADO.Mesh.prototype.getColorBuffer = function(){
 }
 TORNADO.Mesh.prototype.prepare = function(){
 	this.initBuffers();
-	this.initTextures();
+//	this.texture.init();
 /*
     console.debug(this);
     console.debug(this.getVertexBuffer());
@@ -105,13 +107,6 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.normalsArray),gl.STATIC_DRAW);
     this.normalsBuffer.itemSize = 3;
     this.normalsBuffer.numItems = (this.normalsArray.length);
-      	
-    //Texture
-    this.textureCoordBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.textureCoordArray), gl.STATIC_DRAW);
-    this.textureCoordBuffer.itemSize = 2;
-    this.textureCoordBuffer.numItems = (this.textureCoordArray.length);
 
     //Index 
     this.indexBuffer = gl.createBuffer();
@@ -119,29 +114,6 @@ TORNADO.Mesh.prototype.initBuffers = function(){
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexArray),gl.STATIC_DRAW);
     this.indexBuffer.itemSize = 1;
     this.indexBuffer.numItems = this.indexArray.length;
-}
-TORNADO.Mesh.prototype.initTextures = function(){
-
-
-	var self = this;
-    this.texture = gl.createTexture();
-    this.texture.image = new Image();
-    this.texture.image.onload = function() {
-        self.handleLoadedTexture(self.texture);
-    }
-    this.texture.image.src = "rustbin.jpg"; 
-}
-
-TORNADO.Mesh.prototype.handleLoadedTexture = function(texture) {
-  
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
-    gl.generateMipmap(gl.TEXTURE_2D);
-
-    gl.bindTexture(gl.TEXTURE_2D, null);
 }
 TORNADO.Mesh.prototype.beginDraw = function(renderer){
     
@@ -151,18 +123,13 @@ TORNADO.Mesh.prototype.beginDraw = function(renderer){
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalsBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.normalsBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
-    gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.textureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.texture.getCoordsBuffer());
+    gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.texture.getCoordsBuffer().itemSize, gl.FLOAT, false, 0, 0);
+    this.texture.draw();
      
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
     renderer.setMatrixUniforms();
-
-    gl.uniform1i(shaderProgram.useTexturesUniform, document.getElementById("textureCheck").checked);
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, this.texture);
-    gl.uniform1i(shaderProgram.samplerUniform, 0);
-
     gl.drawElements(gl.TRIANGLES,this.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 }
 TORNADO.Mesh.prototype.endDraw = function(){
