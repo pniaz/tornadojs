@@ -70,7 +70,7 @@ $(document ).ready(function() {
 			//scale
 			if(keys[77]) trans.scale(1.01,1.01,1.01);	//delante
 			if(keys[78]) trans.scale(0.99,0.99,0.99);	//atras
-
+			
 	    if(keys[82]) trans.identity();	//reiniciar
 	});
 
