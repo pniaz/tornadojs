@@ -1,5 +1,6 @@
 
 $(document ).ready(function() {
+	var controller = new Leap.Controller();
 	
 	var canvas = document.getElementById("main");
 	
@@ -8,7 +9,6 @@ $(document ).ready(function() {
 	var camera = new TORNADO.Camera();
 	
 
-	
 	var trans = new TORNADO.Transform();
 	var transNode = new TORNADO.Node(trans)
 	scene.addChild(transNode);
@@ -36,6 +36,21 @@ $(document ).ready(function() {
 
 	var lastTime = 0;
 	var t = 0.1;
+
+	controller.on('frame', function(leap){
+		if(leap.hands.length == 1){
+			var hand = leap.hands[0];
+			trans.rotate(0.1,hand.palmPosition[0]/100,(hand.palmPosition[1]-150)/100,hand.palmPosition[2]/100);
+			/*
+			trans.rotate(0.01,0,1,0);	
+			trans.rotate(0.01,1,0,0);	
+	    trans.rotate(-0.01,0,1,0);
+			trans.rotate(-0.01,1,0,0);
+			trans.rotate(0.01,0,0,1);	
+			trans.rotate(-0.01,0,0,1);*/
+		}
+		else trans.identity();
+	});
 
 	renderer.startLoop(function(){
         var timeNow = new Date().getTime();
@@ -81,4 +96,5 @@ $(document ).ready(function() {
 	document.addEventListener('keydown', onkeydown);
 	document.addEventListener('keyup', onkeyup);
 
+	controller.connect();
 });
