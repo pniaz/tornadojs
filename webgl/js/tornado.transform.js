@@ -3,6 +3,7 @@
 */
 TORNADO.Transform = function () {
 	TORNADO.Entity.call(this);
+	this.matrix = mat4.identity();
 };
 extend(TORNADO.Entity, TORNADO.Transform);
 
@@ -54,7 +55,7 @@ TORNADO.Transform.prototype.rotate = function(degrees, x, y, z){
 }
 TORNADO.Transform.prototype.beginDraw = function(renderer){
 	var mv = renderer.mvPushMatrix();
-    mat4.multiply(mv,this.matrix);
+  mat4.multiply(mv,this.matrix);
 }
 TORNADO.Transform.prototype.endDraw = function(renderer){
 	renderer.mvPopMatrix();

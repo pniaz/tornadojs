@@ -6,10 +6,6 @@
    position: absolute;
 }
 
-.container {
-   display: table-cell;
-   vertical-align: middle;
-}
 
 .canvas-container {
    position: relative;

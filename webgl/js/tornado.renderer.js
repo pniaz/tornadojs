@@ -59,11 +59,8 @@ TORNADO.Renderer.prototype = {
 
 	    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         camera.setPerspective(this.pMatrix, this.mvMatrix);
-	    //this.initLights();
-        this.mvPushMatrix();        
+      
         scene.draw(this);
-        this.setMatrixUniforms();      
-	   	this.mvPopMatrix();
 	},
 
     startLoop: function(loop)
