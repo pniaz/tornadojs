@@ -12,6 +12,7 @@
    margin: 0 auto;
 }
 #controllers{
+   position: fixed;
    width: 100%;
    height: 70px;
    background-color: rgba(158,190,63,1);

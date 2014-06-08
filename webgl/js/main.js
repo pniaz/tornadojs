@@ -38,18 +38,14 @@ $(document ).ready(function() {
 	var t = 0.1;
 
 	controller.on('frame', function(leap){
-		if(leap.hands.length == 1){
+		if(leap.hands.length >= 1){
 			var hand = leap.hands[0];
-			trans.rotate(0.1,hand.palmPosition[0]/100,(hand.palmPosition[1]-150)/100,hand.palmPosition[2]/100);
-			/*
-			trans.rotate(0.01,0,1,0);	
-			trans.rotate(0.01,1,0,0);	
-	    trans.rotate(-0.01,0,1,0);
-			trans.rotate(-0.01,1,0,0);
-			trans.rotate(0.01,0,0,1);	
-			trans.rotate(-0.01,0,0,1);*/
+			trans.translate(0,0,hand.palmVelocity[2]/1000);
+
+			trans.rotate(hand.palmVelocity[0]/10000,0,1,0);	
+	    	trans.rotate(hand.palmVelocity[1]/10000,-1,0,0);
 		}
-		else trans.identity();
+		else if(leap.hands.length < 1) trans.identity();
 	});
 
 	renderer.startLoop(function(){
@@ -60,31 +56,31 @@ $(document ).ready(function() {
 	     	
 	     	var vel = 0.0001;
 	     	/*
-				Transformaciones automaticas
+			Transformaciones automaticas
 
 	     	trans.translate(vel*10,vel*10,vel*10);
 	     	trans.scale(1+vel,1+vel,1+vel);
 	     	trans.rotate(elapsed*vel,1+vel,1+vel,1+vel);
 	     	*/
-        renderer.render(scene,camera);
+        	renderer.render(scene,camera);
 	    }
 	    lastTime = timeNow;
 
 	    //rotate
-			if(keys[65]) trans.rotate(0.01,0,1,0);	//izquierda
-			if(keys[87]) trans.rotate(0.01,1,0,0);	//arriba
-	    if(keys[68]) trans.rotate(-0.01,0,1,0);	//derecha
-			if(keys[83]) trans.rotate(-0.01,1,0,0);	//abajo
-			if(keys[81]) trans.rotate(0.01,0,0,1);	//abajo
-			if(keys[69]) trans.rotate(-0.01,0,0,1);	//abajo
-			//translate
-			if(keys[37]) trans.translate(-0.1,0,0);	//izquierda
-			if(keys[38]) trans.translate(0,0.1,0);	//arriba
-			if(keys[39]) trans.translate(0.1,0,0,1);	//derecha
-			if(keys[40]) trans.translate(0,-0.1,0);	//abajo
-			//scale
-			if(keys[77]) trans.scale(1.01,1.01,1.01);	//delante
-			if(keys[78]) trans.scale(0.99,0.99,0.99);	//atras
+		if(keys[65]) trans.rotate(0.01,0,1,0);	//izquierda
+		if(keys[87]) trans.rotate(0.01,1,0,0);	//arriba
+    	if(keys[68]) trans.rotate(-0.01,0,1,0);	//derecha
+		if(keys[83]) trans.rotate(-0.01,1,0,0);	//abajo
+		if(keys[81]) trans.rotate(0.01,0,0,1);	//abajo
+		if(keys[69]) trans.rotate(-0.01,0,0,1);	//abajo
+		//translate
+		if(keys[37]) trans.translate(-0.1,0,0);	//izquierda
+		if(keys[38]) trans.translate(0,0.1,0);	//arriba
+		if(keys[39]) trans.translate(0.1,0,0,1);	//derecha
+		if(keys[40]) trans.translate(0,-0.1,0);	//abajo
+		//scale
+		if(keys[77]) trans.scale(1.01,1.01,1.01);	//delante
+		if(keys[78]) trans.scale(0.99,0.99,0.99);	//atras
 			
 	    if(keys[82]) trans.identity();	//reiniciar
 	});
